@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class OnDrag : MonoBehaviour
 {
-    private Vector3 mOffset;
-    private float mZCoord;
     public Unit myUnit;
-    public IntVariable PauseStatus;
+
+    public UnitOrProfileEvent StartTowerDrag;
+    public BasicEvent EndTowerDrag;
+    public BasicEvent DoTowerDrag;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -14,30 +16,15 @@ public class OnDrag : MonoBehaviour
 
     void OnMouseDown()
     {
-        mZCoord = Camera.main.WorldToScreenPoint(myUnit.positionRef.transform.position).z;
-        // Store offset = gameobject world pos - mouse world pos
-        mOffset = myUnit.positionRef.transform.position - GetMouseAsWorldPoint();
-        PauseStatus.Value++;
+        StartTowerDrag.Raise(myUnit, myUnit.profile); // Initialize tower dragging
     }
 
     void OnMouseUp() {
-        PauseStatus.Value--;
-    }
-
-    private Vector3 GetMouseAsWorldPoint()
-    {
-        // Pixel coordinates of mouse (x,y)
-        Vector3 mousePoint = Input.mousePosition;
-
-        // z coordinate of game object on screen
-        mousePoint.z = mZCoord;
-
-        // Convert it to world points
-        return Camera.main.ScreenToWorldPoint(mousePoint);
+        EndTowerDrag.Raise(); // end tower dragging
     }
 
     void OnMouseDrag()
     {
-        myUnit.positionRef.transform.position = GetMouseAsWorldPoint() + mOffset;
+        DoTowerDrag.Raise(); // do tower dragging
     }
 }

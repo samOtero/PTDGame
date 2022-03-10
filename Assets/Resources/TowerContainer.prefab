@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myUnit: {fileID: 0}
   PauseStatus: {fileID: 11400000, guid: a264ff026ea714e449ebd2932560c752, type: 2}
+  StartTowerDrag: {fileID: 11400000, guid: 290c37b82dbd1364cacbd0d7cbb6ee27, type: 2}
+  EndTowerDrag: {fileID: 11400000, guid: 1d8a2629240e2e04cb241ae16ca48e87, type: 2}
+  DoTowerDrag: {fileID: 11400000, guid: d94db0c03fcafa345a9e9ef93caed2f7, type: 2}
 --- !u!1001 &6345286017612495445
 PrefabInstance:
   m_ObjectHideFlags: 0
