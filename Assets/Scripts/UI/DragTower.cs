@@ -5,7 +5,7 @@ public class DragTower : MonoBehaviour
     public IntVariable PauseStatus;
     public TowerSpotVariable selectedTowerSpot;
     public GameObject TowerTemplate;
-    public UnitOrProfileEvent StartTowerDrag;
+    public IntEvent StartTowerDrag;
     public BasicEvent EndTowerDrag;
     public BasicEvent DoTowerDrag;
     private RectTransform rectTransform;
@@ -14,6 +14,10 @@ public class DragTower : MonoBehaviour
     public UnitProfile draggingUnitProfile;
     public Canvas UICanvas;
     public float canvasScaleFactor;
+    public UnitParty currentParty;
+    public bool isDragging;
+    public int partyPosition;
+    public bool needToCreate;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,13 +27,20 @@ public class DragTower : MonoBehaviour
         StartTowerDrag.RegisterListener(onStartTowerDrag);
         DoTowerDrag.RegisterListener(onDragTower);
         EndTowerDrag.RegisterListener(onEndTowerDrag);
+        isDragging = false;
     }
 
-    private int onStartTowerDrag(Unit unit, UnitProfile profile) {
-        draggingUnit = unit;
-        draggingUnitProfile = profile;
-        rectTransform.anchoredPosition = Input.mousePosition / canvasScaleFactor;
-        PauseStatus.Value++;
+    private int onStartTowerDrag(int pos) {
+        partyPosition = pos;
+        //If we have a unit for that tower position then let's start dragging it
+        if (currentParty.party != null && partyPosition < currentParty.party.Count) {
+            draggingUnit = currentParty.party[partyPosition].unit;
+            draggingUnitProfile = currentParty.party[partyPosition].profile;
+            needToCreate = !currentParty.party[partyPosition].hasBeenCreated;
+            rectTransform.anchoredPosition = Input.mousePosition / canvasScaleFactor;
+            PauseStatus.Value++;
+            isDragging = true;
+        }
         return 1;
     }
 
@@ -54,6 +65,7 @@ public class DragTower : MonoBehaviour
         //Set unit script
         var unitScript = newUnit.GetComponent<Unit>();
         unitScript.doInit(profile);
+        unitScript.partyPos = partyPosition;
 
         return unitScript;
     }
@@ -63,7 +75,13 @@ public class DragTower : MonoBehaviour
         // If we are dragging on top of a tower spot then add the unit to that spot
         if (selectedTowerSpot.Value != null) {
             // If we haven't instatiated a tower yet then create one
-            if (draggingUnit == null) draggingUnit = CreateTower(draggingUnitProfile);
+            if (needToCreate) {
+                draggingUnit = CreateTower(draggingUnitProfile);
+                //Store the unit in the party reference
+                currentParty.party[partyPosition].unit = draggingUnit;
+                currentParty.party[partyPosition].hasBeenCreated = true;
+                needToCreate = false;
+            } 
             selectedTowerSpot.Value.AddUnit(draggingUnit);
         }
 

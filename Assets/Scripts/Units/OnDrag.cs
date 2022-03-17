@@ -4,7 +4,7 @@ public class OnDrag : MonoBehaviour
 {
     public Unit myUnit;
 
-    public UnitOrProfileEvent StartTowerDrag;
+    public IntEvent StartTowerDrag;
     public BasicEvent EndTowerDrag;
     public BasicEvent DoTowerDrag;
     
@@ -16,7 +16,7 @@ public class OnDrag : MonoBehaviour
 
     void OnMouseDown()
     {
-        StartTowerDrag.Raise(myUnit, myUnit.profile); // Initialize tower dragging
+        StartTowerDrag.Raise(myUnit.partyPos); // Initialize tower dragging
     }
 
     void OnMouseUp() {

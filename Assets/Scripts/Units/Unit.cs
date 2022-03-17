@@ -27,6 +27,7 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
     public int id;
 
     public UnitProfile profile;
+    public int partyPos; // Tower unit's position in the party
     public int attackSelected;
     public bool isDragged; 
 
