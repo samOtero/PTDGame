@@ -643,6 +643,10 @@ MonoBehaviour:
   draggingUnitProfile: {fileID: 0}
   UICanvas: {fileID: 1894465640}
   canvasScaleFactor: 0
+  currentParty: {fileID: 11400000, guid: 16f87b819b7da344b897b3fc9f583818, type: 2}
+  isDragging: 0
+  partyPosition: 0
+  needToCreate: 0
 --- !u!1 &565914756
 GameObject:
   m_ObjectHideFlags: 0
@@ -1493,14 +1497,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8394d62ea824306419c59301eaf90d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PauseState: {fileID: 11400000, guid: a264ff026ea714e449ebd2932560c752, type: 2}
-  selectedTowerSpot: {fileID: 11400000, guid: 34412af143bd12a4288cccd10753a8fd, type: 2}
-  profile: {fileID: 11400000, guid: e7ad7445ab8bff641bc4bf678a2840ef, type: 2}
-  myUnit: {fileID: 0}
-  TowerTemplate: {fileID: 4656894821810783984, guid: 2ff6b753a129588428dc854d277c4939, type: 3}
   StartTowerDrag: {fileID: 11400000, guid: 290c37b82dbd1364cacbd0d7cbb6ee27, type: 2}
   EndTowerDrag: {fileID: 11400000, guid: 1d8a2629240e2e04cb241ae16ca48e87, type: 2}
   DoTowerDrag: {fileID: 11400000, guid: d94db0c03fcafa345a9e9ef93caed2f7, type: 2}
+  partyPosition: 0
 --- !u!1 &1128518796
 GameObject:
   m_ObjectHideFlags: 0

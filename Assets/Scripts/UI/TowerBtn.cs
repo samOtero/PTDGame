@@ -3,11 +3,10 @@ using UnityEngine.EventSystems;
 
 public class TowerBtn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-    public UnitProfile profile;
-    public Unit myUnit;
-    public UnitOrProfileEvent StartTowerDrag;
+    public IntEvent StartTowerDrag;
     public BasicEvent EndTowerDrag;
     public BasicEvent DoTowerDrag;
+    public int partyPosition;
 
     public void OnPointerDown(PointerEventData eventData) {
     }
@@ -18,7 +17,7 @@ public class TowerBtn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     }
 
     public void OnBeginDrag(PointerEventData eventData) {
-        StartTowerDrag.Raise(myUnit, profile); // Start dragging the tower
+        StartTowerDrag.Raise(partyPosition); // Start dragging the tower
     }
 
     public void OnDrag(PointerEventData eventData) {
