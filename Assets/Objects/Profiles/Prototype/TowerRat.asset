@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3da0b77720127c4d803670729105780, type: 3}
-  m_Name: Tower1Dog
+  m_Name: TowerRat
   m_EditorClassIdentifier: 
-  unitID: 0
-  unitGfxName: u0000_dog
+  unitID: 20
+  nickname: Ratty
   attack1ID: 2
   attack2ID: 0
   attack3ID: 0

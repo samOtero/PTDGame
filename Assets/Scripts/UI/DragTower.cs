@@ -18,6 +18,7 @@ public class DragTower : MonoBehaviour
     public bool isDragging;
     public int partyPosition;
     public bool needToCreate;
+    public GameObject UnitGfxContainer;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +39,7 @@ public class DragTower : MonoBehaviour
             draggingUnitProfile = currentParty.party[partyPosition].profile;
             needToCreate = !currentParty.party[partyPosition].hasBeenCreated;
             rectTransform.anchoredPosition = Input.mousePosition / canvasScaleFactor;
+            UIUtil.setUnitGfx(draggingUnitProfile.unitID, UnitGfxContainer.transform); // Set drag Unit Graphic
             PauseStatus.Value++;
             isDragging = true;
         }

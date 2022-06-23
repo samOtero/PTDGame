@@ -4,6 +4,7 @@ using UnityEngine;
 public class UnitProfile : ScriptableObject
 {
     public int unitID;
+    public string nickname;
     public AttackID attack1ID;
     public AttackID attack2ID;
     public AttackID attack3ID;
