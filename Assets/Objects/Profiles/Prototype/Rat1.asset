@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3da0b77720127c4d803670729105780, type: 3}
+  m_Name: Rat1
+  m_EditorClassIdentifier: 
+  unitID: 20
+  attack1ID: 1
+  attack2ID: 0
+  attack3ID: 0
+  attack4ID: 0
+  attackSelected: 0
+  lvl: 1
+  exp: 0
+  special: 0
+  baseHP: 10
+  baseSpeed: 7
+  freeRoam: 0
+  nonDamagingAttackOnly: 1

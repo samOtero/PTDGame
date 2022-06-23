@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7325601725802836892}
   m_Layer: 0
-  m_Name: u0000_dog
+  m_Name: u0001_frog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,7 +116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9139543273511392400, guid: 76d7ee26917d1e2498457c84bf1f9d48, type: 3}
       propertyPath: m_Name
-      value: u0000_dog
+      value: u0001_frog
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76d7ee26917d1e2498457c84bf1f9d48, type: 3}

@@ -20,6 +20,15 @@ public class UnitProfile : ScriptableObject
     public bool nonDamagingAttackOnly;
 
     public static string GetUnitGfxName(int unitID) {
-        return "u0000_dog";
+        var name = "";
+        switch(unitID) {
+            case 20:
+                name = "u0020_rat";
+                break;
+            default:
+                name = "u0001_frog";
+                break;
+        }
+        return name;
     }
 }
