@@ -7,6 +7,7 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
     public bool isEnemy;
     public bool isAlive;
     public bool isHidding;
+    public bool isBattling;
     public int totalLife;
     public int currentLife;
 
@@ -41,6 +42,9 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
         currentSpeed = profile.baseSpeed;
         totalLife = profile.baseHP;
         attackSelected = profile.attackSelected;
+
+        // Unit is not battling yet
+        isBattling = false;
 
         this.profile = profile;
         // Add unit to it's respective list
@@ -113,6 +117,11 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
         positionRef.transform.position = new Vector3(1000.0f, 500.0f, 0);
     }
 
+    // This is to be called when a unit is put into the battle field or removed
+    public void setIsBattling(bool isBattling) {
+       this.isBattling = isBattling;
+    }
+
     public void doFade(float newFade) {
        if (newFade >= 1) {
            MaterialUtil.ToOpaqueMode(graphicMaterial);
@@ -176,7 +185,7 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
     }
 
     public bool isTargetable() {
-        return isAlive && !isHidding;
+        return isAlive && !isHidding && isBattling;
     }
 
     public Vector3 getLocation() {

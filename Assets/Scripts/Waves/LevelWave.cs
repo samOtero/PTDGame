@@ -81,6 +81,7 @@ public class LevelWave : MonoBehaviour
             follower.reset(path);
         }
         whichUnit.Reset();
+        whichUnit.setIsBattling(true); // When enemy is spawned it is now battling!
     }
 
     public int UnitLeftLevelEvent(Unit whichUnit) {

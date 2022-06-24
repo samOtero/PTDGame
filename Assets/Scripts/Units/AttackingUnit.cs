@@ -19,7 +19,8 @@ public class AttackingUnit : MonoBehaviour
         }
         if (attack1 != null) {
             attack1.runCooldown(Time.deltaTime);
-            attack1.doAttack();
+            // Only try to attack if we are battling
+            if (myUnit.isBattling) attack1.doAttack();
         }
     }
 
