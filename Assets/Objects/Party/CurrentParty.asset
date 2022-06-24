@@ -17,5 +17,8 @@ MonoBehaviour:
     profile: {fileID: 11400000, guid: e7ad7445ab8bff641bc4bf678a2840ef, type: 2}
     hasBeenCreated: 0
   - unit: {fileID: 0}
-    profile: {fileID: 11400000, guid: fc7da072d0b1a20429a8dfdce42a2f39, type: 2}
+    profile: {fileID: 0}
+    hasBeenCreated: 0
+  - unit: {fileID: 0}
+    profile: {fileID: 0}
     hasBeenCreated: 0
