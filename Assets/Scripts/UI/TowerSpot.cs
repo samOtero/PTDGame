@@ -12,6 +12,7 @@ public class TowerSpot : MonoBehaviour
         var newPos = transform.position;
         newPos.y = 1.0f;
         myUnit.positionRef.transform.position = newPos;
+        myUnit.setIsBattling(true); // When added to a spot the unit is now battling!
     }
 
     private void OnMouseEnter() {

@@ -744,7 +744,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PauseStatus: {fileID: 11400000, guid: a264ff026ea714e449ebd2932560c752, type: 2}
   selectedTowerSpot: {fileID: 11400000, guid: 34412af143bd12a4288cccd10753a8fd, type: 2}
-  TowerTemplate: {fileID: 4656894821810783984, guid: 2ff6b753a129588428dc854d277c4939, type: 3}
   StartTowerDrag: {fileID: 11400000, guid: 290c37b82dbd1364cacbd0d7cbb6ee27, type: 2}
   EndTowerDrag: {fileID: 11400000, guid: 1d8a2629240e2e04cb241ae16ca48e87, type: 2}
   DoTowerDrag: {fileID: 11400000, guid: d94db0c03fcafa345a9e9ef93caed2f7, type: 2}
@@ -755,7 +754,6 @@ MonoBehaviour:
   currentParty: {fileID: 11400000, guid: 16f87b819b7da344b897b3fc9f583818, type: 2}
   isDragging: 0
   partyPosition: 0
-  needToCreate: 0
   UnitGfxContainer: {fileID: 204961320}
 --- !u!1 &565914756
 GameObject:
@@ -1451,6 +1449,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1128518796}
   m_CullTransparentMesh: 1
+--- !u!1 &1294913646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1294913648}
+  - component: {fileID: 1294913647}
+  m_Layer: 0
+  m_Name: PartyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1294913647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294913646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ffa1052ba4fa9c4ea6faad795c3db28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TowerTemplate: {fileID: 4656894821810783984, guid: 2ff6b753a129588428dc854d277c4939, type: 3}
+  currentParty: {fileID: 11400000, guid: 16f87b819b7da344b897b3fc9f583818, type: 2}
+--- !u!4 &1294913648
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294913646}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -62.44, y: 12.07, z: -4.56}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1394603788
 PrefabInstance:
   m_ObjectHideFlags: 0
