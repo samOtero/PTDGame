@@ -28,6 +28,7 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
     public int id;
 
     public UnitProfile profile;
+    public WayPointFollower pathFollower;
     public int partyPos; // Tower unit's position in the party
     public int attackSelected;
     public bool isDragged; 
@@ -57,6 +58,7 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
             graphicMaterial = renderer.materials[0];
         }
         id = 1; //should get this from global
+        pathFollower = gameObject.GetComponent<WayPointFollower>();
         Reset();
     }
 
@@ -74,8 +76,9 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
 
     protected void doLifeChangeEvent() {
         if (LifeChangeListeners != null) {
+            var lifePercent = getLifePercent();
             foreach(var listener in LifeChangeListeners) {
-                listener(getLifePercent());
+                listener(lifePercent);
             }
         }
     }
@@ -101,6 +104,7 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
     public void doCapture() {
         setLife(0);
         isAlive = false;
+        if (pathFollower) pathFollower.dropCandy();
         doHide();
         UnitCaptured.Raise(this);
     }
@@ -144,6 +148,7 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
     private void onDefeat() {
         setLife(0);
         isAlive = false;
+        if (pathFollower) pathFollower.dropCandy();
         doHide();
         if (UnitDefeatedEvent) UnitDefeatedEvent.Raise(this);
     }
