@@ -10,9 +10,13 @@ public class WayPointFollower : MonoBehaviour
     public bool turnedAround;
     public bool freeRoam;
     public bool dontLeave;
+    public bool canCaptureCandy;
+    public bool hasCandy;
+    public CandyUnit carriedCandy;
     public Vector3 directionVector;
     public UnitEvent UnitLeftEvent;
     public IntVariable PauseStatus;
+    public CandyRuntimeCollection candyList;
 
     public void reset(Waypoint startPoint) {
         if (myUnit == null) myUnit = gameObject.GetComponent<Unit>(); //lazy load
@@ -20,6 +24,7 @@ public class WayPointFollower : MonoBehaviour
         myUnit.positionRef.transform.position = startPoint.transform.position;
         initialPoint = startPoint;
         turnedAround = false;
+        canCaptureCandy = myUnit.profile.canCaptureCandy;
         setNewPoint(initialPoint);
     }
 
@@ -39,11 +44,26 @@ public class WayPointFollower : MonoBehaviour
                 targetPoint = GetTargetPoint(currentPoint);
             }else {
                 //If we reached our end
+
+                //If we have candy then we want to capture it
+                if (hasCandy) {
+                    carriedCandy.onCaptured();
+                    hasCandy = false;
+                    carriedCandy = null;
+                }
                 if (UnitLeftEvent) UnitLeftEvent.Raise(myUnit);
             }
         }
 
         getNewRotation(currentPoint, turnedAround);
+    }
+
+    public void dropCandy() {
+        if (!hasCandy) return;
+
+        carriedCandy.onDrop();
+        hasCandy = false;
+        carriedCandy = null;
     }
 
     private Waypoint GetTargetPoint(Waypoint whichPoint) {
@@ -58,7 +78,48 @@ public class WayPointFollower : MonoBehaviour
         directionVector = Quaternion.Euler(0,rotation,0) * Vector3.forward;
     }
 
-    
+    // Check for candy
+    private void checkForCandy() {
+        //Check for candy in range
+        var candyInRange = getCandyInRange();
+        if (candyInRange != null) {
+            hasCandy = true;
+            //Attach candy to unit and set candy as caught
+            carriedCandy = candyInRange;
+            candyInRange.onPickup();
+            candyInRange.transform.parent = myUnit.transform; // TODO: Change this to a particular spot for the candy
+            //turn around back to our exit point
+            // TODO: potentially refactor this so this logic can exist in one place
+            if (!freeRoam && !turnedAround){
+                turnedAround = !turnedAround;
+                setNewPoint(targetPoint);
+            }
+        }
+    }
+
+    private CandyUnit getCandyInRange() {
+        Vector2 unitLoc = new Vector2(myUnit.positionRef.transform.position.x, myUnit.positionRef.transform.position.z);
+        Vector2 candyLoc = new Vector2();
+        CandyUnit currentTarget;
+        float deltaDistance;
+        float range = 0.6f; // this should be close enough to the candy to be considered in range
+        if (candyList == null) {
+            Debug.LogError("Candy List is null on WayPointFollower");
+            return null;
+        }
+        for(var i=0; i<candyList.Items.Count; i++) {
+            currentTarget = candyList.Items[i];
+            if (currentTarget.canPickup() == false) continue;
+            candyLoc.x = currentTarget.transform.position.x;
+            candyLoc.y = currentTarget.transform.position.z;
+            deltaDistance = Vector2.Distance(unitLoc, candyLoc);
+            if (deltaDistance <= range) {
+                return currentTarget;
+            }
+        }
+
+        return null;
+    }
 
     void Update() {
         if (PauseStatus.Value > 0) return;
@@ -66,6 +127,7 @@ public class WayPointFollower : MonoBehaviour
         if (currentPoint == null) return;
         myUnit.positionRef.transform.Translate(directionVector * Time.deltaTime * myUnit.currentSpeed);
         checkIfReachedPoint();
+        if (canCaptureCandy && !hasCandy) checkForCandy();
     }
 
     private bool checkIfReachedPoint() {

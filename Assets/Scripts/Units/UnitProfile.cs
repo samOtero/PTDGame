@@ -17,6 +17,8 @@ public class UnitProfile : ScriptableObject
     public float baseSpeed;
     //Will unit leave the level after reaching the end of the path
     public bool freeRoam;
+    // Can the unit capture candy
+    public bool canCaptureCandy;
 
     public bool nonDamagingAttackOnly;
 

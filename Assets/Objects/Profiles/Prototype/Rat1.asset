@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Rat1
   m_EditorClassIdentifier: 
   unitID: 20
+  nickname: 
   attack1ID: 1
   attack2ID: 0
   attack3ID: 0
@@ -24,4 +25,5 @@ MonoBehaviour:
   baseHP: 10
   baseSpeed: 7
   freeRoam: 0
+  canCaptureCandy: 1
   nonDamagingAttackOnly: 1
