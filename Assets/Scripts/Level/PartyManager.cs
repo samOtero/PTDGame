@@ -35,7 +35,7 @@ public class PartyManager : MonoBehaviour
 
         // Hardcoding this for now, later will extract from actual unit
         var newProfile = new UnitProfile();
-        newProfile.unitID = 20;
+        newProfile.unitID = 19;
         newProfile.nickname = "Ratty";
         newProfile.attack1ID = AttackID.BASIC_PROJECTILE;
         newProfile.lvl = 1;
@@ -83,6 +83,10 @@ public class PartyManager : MonoBehaviour
         var graphicResourceName = "unitGfx/"+unitGfxName;
         var unitGfx = Object.Instantiate(Resources.Load(graphicResourceName), newUnit.transform) as GameObject;
         unitGfx.name = "unitGfx";
+
+        // Add default values to profile
+        // this will probably move higher up the chain once more is built out
+        UnitProfile.getBaseValues(profile);
 
         //Set unit script
         var unitScript = newUnit.GetComponent<Unit>();

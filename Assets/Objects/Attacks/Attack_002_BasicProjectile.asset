@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Attack_002_BasicProjectile
   m_EditorClassIdentifier: 
   range: 5
-  power: 3
+  basePower: 40
   attackerNeedsAlive: 1
   initialCooldown: 0.5
   targetFriendly: 0
