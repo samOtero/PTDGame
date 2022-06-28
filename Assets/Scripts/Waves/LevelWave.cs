@@ -43,6 +43,10 @@ public class LevelWave : MonoBehaviour
         var unitGfx = Object.Instantiate(Resources.Load(graphicResourceName), newUnit.transform) as GameObject;
         unitGfx.name = "unitGfx";
 
+        // Add default values to profile
+        // this will probably move higher up the chain once more is built out
+        UnitProfile.getBaseValues(profile);
+
         //Set unit script
         var unitScript = newUnit.GetComponent<Unit>();
         unitScript.doInit(profile);

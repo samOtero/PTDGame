@@ -11,7 +11,8 @@ public class Attack_Projectile : Attack
         if (target) {
             //Create projectile effect and trigger effects
             baseFunc.faceTarget(myUnit, target);
-            var damageFx = new Effect_Damage(target, myUnit, power, attackerNeedsAlive);
+            var damageAmount = baseFunc.getDamage(myUnit, target, moveType, stab, power, isPhysical);
+            var damageFx = new Effect_Damage(target, myUnit, damageAmount, attackerNeedsAlive);
             var fadeFx = new EffectFadeUnit(myUnit);
             var trigger = new Effect_Trigger_Remove();
             trigger.addToEndStack(damageFx);

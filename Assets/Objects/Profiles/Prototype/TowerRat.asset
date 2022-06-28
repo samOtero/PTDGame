@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3da0b77720127c4d803670729105780, type: 3}
   m_Name: TowerRat
   m_EditorClassIdentifier: 
-  unitID: 20
+  unitID: 19
   nickname: Ratty
   attack1ID: 2
   attack2ID: 0
@@ -23,6 +23,12 @@ MonoBehaviour:
   exp: 0
   special: 0
   baseHP: 10
+  baseAttack: 0
+  baseSpAttack: 0
+  baseDefense: 0
+  baseSpDefense: 0
   baseSpeed: 7
   freeRoam: 0
+  canCaptureCandy: 0
+  elements: 
   nonDamagingAttackOnly: 0

@@ -13,6 +13,9 @@ public class Attack
     protected float initialCooldown;
     protected bool attackerNeedsAlive;
     protected int power;
+    protected ELMTTYPE moveType;
+    protected bool isPhysical;
+    protected float stab;
     protected BaseAttack baseFunc;
     protected EffectEvent addEffectEvent;
 
@@ -28,7 +31,12 @@ public class Attack
         targetFriendly = profile.targetFriendly;
         initialCooldown = profile.initialCooldown;
         attackerNeedsAlive = profile.attackerNeedsAlive;
-        power = profile.power;
+        power = profile.basePower;
+        moveType = profile.moveType;
+        isPhysical = profile.isPhysical;
+        // we can calculate this one time and be done!
+        // in PTD we calculated this every time we attacked
+        stab = baseFunc.getStabMultiplier(myUnit, moveType);
         targetList = !targetFriendly ? myUnit.getEnemyList() : myUnit.getFriendlyList();
         reset();
     }
