@@ -22,6 +22,7 @@ MonoBehaviour:
   dontLeave: 0
   canCaptureCandy: 0
   hasCandy: 0
+  carriedCandy: {fileID: 0}
   directionVector: {x: 0, y: 0, z: 0}
   UnitLeftEvent: {fileID: 11400000, guid: b3943d2a975a94546b36fe35990302e2, type: 2}
   PauseStatus: {fileID: 11400000, guid: a264ff026ea714e449ebd2932560c752, type: 2}

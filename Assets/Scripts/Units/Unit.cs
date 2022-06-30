@@ -29,12 +29,33 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
 
     public UnitProfile profile;
     public WayPointFollower pathFollower;
+    // Stores spot the tower is on, if any
+    public TowerSpot currentSpot;
     public int partyPos; // Tower unit's position in the party
     public int attackSelected;
     public bool isDragged; 
 
+    // Events for dragging a tower
+    public IntEvent StartTowerDrag;
+    public BasicEvent EndTowerDrag;
+    public BoxCollider dragCollider;
+
     public int getID() {
         return id;
+    }
+
+    // Called when a tower started to be dragged
+    public int onStartedTowerDrag(int partyPos) {
+        // disable colliders
+        if (dragCollider != null) dragCollider.enabled = false;
+        return 1;
+    }
+
+    // Called when a tower stops being dragged
+    public int onEndedTowerDrag() {
+        // enable colliders
+        if (dragCollider != null) dragCollider.enabled = true;
+        return 1;
     }
 
     
@@ -59,6 +80,12 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
         }
         id = 1; //should get this from global
         pathFollower = gameObject.GetComponent<WayPointFollower>();
+        dragCollider = gameObject.GetComponent<BoxCollider>();
+
+        // Register listeners for tower drags
+        StartTowerDrag.RegisterListener(onStartedTowerDrag);
+        EndTowerDrag.RegisterListener(onEndedTowerDrag);
+
         Reset();
     }
 
@@ -113,6 +140,13 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
         var isCapturable = false;
         if (getLifePercent() <= weaknessLevel.Value) isCapturable = true;
         return isCapturable;
+    }
+
+    public void removeFromBattle() {
+        if (currentSpot) currentSpot.removeUnit(this);
+        setIsBattling(false);
+        currentSpot = null;
+        positionRef.transform.position = new Vector3(1000.0f, 500.0f, 0);
     }
 
     // Hide Unit from view
