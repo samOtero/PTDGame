@@ -31,6 +31,9 @@ public class TowerBtn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                 isEmpty = false;
                 UnitNickName.text = currentProfile.nickname; // Assign unit's nickname to button text
                 UIUtil.setUnitGfx(currentProfile.unitID, unitGfxContainer.transform); // Set Button Unit Graphic
+                // Set scale but graphic based on profile
+                var unitBaseInfo = UnitProfile.GetBaseInfo(currentProfile.unitID);
+                unitGfxContainer.transform.localScale = new Vector3(unitBaseInfo.UIScale, unitBaseInfo.UIScale, unitBaseInfo.UIScale);
             }
         }
     }

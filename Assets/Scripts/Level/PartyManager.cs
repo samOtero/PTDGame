@@ -76,7 +76,7 @@ public class PartyManager : MonoBehaviour
     private Unit CreateTower(UnitProfile profile, int partyPosition) {
         var unitTemplate = TowerTemplate; //Would get which template we need from the profile, for now we just have only one
         var newUnit = Instantiate(unitTemplate, transform);
-        var unitGfxName = UnitProfile.GetUnitGfxName(profile.unitID);
+        var unitGfxName = UnitProfile.GetWholeUnitGfxName(profile.unitID);
         newUnit.name = "Tower_"+unitGfxName;
 
         // Get graphic resource

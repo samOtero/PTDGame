@@ -35,7 +35,7 @@ public class LevelWave : MonoBehaviour
     Unit CreateEnemy(UnitProfile profile) {
         var unitTemplate = EnemyFollowPath1; //Would get which template we need from the profile, for now we just have only one
         var newUnit = Instantiate(unitTemplate);
-        var unitGfxName = UnitProfile.GetUnitGfxName(profile.unitID);
+        var unitGfxName = UnitProfile.GetWholeUnitGfxName(profile.unitID);
         newUnit.name = "Enemy_"+unitGfxName;
 
         // Get graphic resource

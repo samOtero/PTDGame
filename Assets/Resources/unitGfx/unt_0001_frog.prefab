@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7325601725802836892}
   m_Layer: 0
-  m_Name: u0001_frog
+  m_Name: unt_0001_frog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,12 +75,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1606469976865125893, guid: 76d7ee26917d1e2498457c84bf1f9d48, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1606469976865125893, guid: 76d7ee26917d1e2498457c84bf1f9d48, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1606469976865125893, guid: 76d7ee26917d1e2498457c84bf1f9d48, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1606469976865125893, guid: 76d7ee26917d1e2498457c84bf1f9d48, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.192
       objectReference: {fileID: 0}
     - target: {fileID: 1606469976865125893, guid: 76d7ee26917d1e2498457c84bf1f9d48, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.017
       objectReference: {fileID: 0}
     - target: {fileID: 1606469976865125893, guid: 76d7ee26917d1e2498457c84bf1f9d48, type: 3}
       propertyPath: m_LocalPosition.z

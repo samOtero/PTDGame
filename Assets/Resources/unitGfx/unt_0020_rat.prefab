@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7325601725802836892}
   m_Layer: 0
-  m_Name: u0020_rat
+  m_Name: unt_0020_rat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +80,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6456424601065272839, guid: 80cf1652bb5340d4dad803529e057fff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.163
       objectReference: {fileID: 0}
     - target: {fileID: 6456424601065272839, guid: 80cf1652bb5340d4dad803529e057fff, type: 3}
       propertyPath: m_LocalPosition.y
