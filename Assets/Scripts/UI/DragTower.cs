@@ -53,6 +53,9 @@ public class DragTower : MonoBehaviour
         // If we are dragging on top of a tower spot then add the unit to that spot
         if (selectedTowerSpot.Value != null) {
             selectedTowerSpot.Value.AddUnit(draggingUnit);
+        }else{
+            // we we drop the unit outside a tower spot then call it back
+            draggingUnit.removeFromBattle();
         }
 
         draggingUnit = null;
