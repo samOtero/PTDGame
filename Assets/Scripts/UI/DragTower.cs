@@ -37,6 +37,11 @@ public class DragTower : MonoBehaviour
             draggingUnitProfile = currentParty.party[partyPosition].profile;
             rectTransform.anchoredPosition = Input.mousePosition / canvasScaleFactor;
             UIUtil.setUnitGfx(draggingUnitProfile.unitID, UnitGfxContainer.transform); // Set drag Unit Graphic
+
+            // Set scale but graphic based on profile
+            var unitBaseInfo = UnitProfile.GetBaseInfo(draggingUnitProfile.unitID);
+            UnitGfxContainer.transform.localScale = new Vector3(unitBaseInfo.UIScale, unitBaseInfo.UIScale, unitBaseInfo.UIScale);
+            
             PauseStatus.Value++;
             isDragging = true;
         }

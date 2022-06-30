@@ -43,6 +43,7 @@ public class UnitProfile : ScriptableObject
         switch(unitID) {
             case 19:
                 baseInfo.gfxResourceName = "u0020_rat";
+                baseInfo.UnitResourceName = "unt_0020_rat";
                 baseInfo.elements = new List<ELMTTYPE>() { ELMTTYPE.NORMAL };
                 baseInfo.baseHP = 30;
                 baseInfo.baseAttack = 56;
@@ -50,10 +51,12 @@ public class UnitProfile : ScriptableObject
                 baseInfo.baseSpAttack = 25;
                 baseInfo.baseSpDefense = 35;
                 baseInfo.baseSpeed = 72;
+                baseInfo.UIScale = 37f;
                 break;
             case 1:
             default:
                 baseInfo.gfxResourceName = "u0001_frog";
+                baseInfo.UnitResourceName = "unt_0001_frog";
                 baseInfo.elements = new List<ELMTTYPE>() { ELMTTYPE.GRASS, ELMTTYPE.POISON };
                 baseInfo.baseHP = 45;
                 baseInfo.baseAttack = 49;
@@ -61,6 +64,7 @@ public class UnitProfile : ScriptableObject
                 baseInfo.baseSpAttack = 65;
                 baseInfo.baseSpDefense = 65;
                 baseInfo.baseSpeed = 45;
+                baseInfo.UIScale = 37f;
                 break;
         }
         return baseInfo;
@@ -69,6 +73,12 @@ public class UnitProfile : ScriptableObject
     public static string GetUnitGfxName(int unitID) {
         var baseInfo = GetBaseInfo(unitID);
         var name = baseInfo != null ? baseInfo.gfxResourceName : "";
+        return name;
+    }
+
+    public static string GetWholeUnitGfxName(int unitID) {
+         var baseInfo = GetBaseInfo(unitID);
+        var name = baseInfo != null ? baseInfo.UnitResourceName : "";
         return name;
     }
 }
