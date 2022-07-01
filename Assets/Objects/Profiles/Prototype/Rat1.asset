@@ -28,7 +28,7 @@ MonoBehaviour:
   baseSpAttack: 0
   baseDefense: 0
   baseSpDefense: 0
-  baseSpeed: 7
+  baseSpeed: 4
   freeRoam: 0
   canCaptureCandy: 1
   elements: 

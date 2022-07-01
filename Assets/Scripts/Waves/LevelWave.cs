@@ -5,29 +5,60 @@ public class LevelWave : MonoBehaviour
 {
     public UnitEvent UnitLeftEvent;
     public UnitEvent UnitDefeatedEvent;
-
     public UnitEvent UnitCapturedEvent;
-    public Waypoint Path1;
-    public Waypoint Path2;
-    public Waypoint Path3;
-    public Waypoint Path4;
-
-    public UnitProfile profile1;
-
+    public SpawnEnemyInPath SpawnEnemyInPathEvent;
+    public List<WaveSegmentContainer> segmentContainers;
+    public WaveSegmentContainer currentContainer;
+    public List<Waypoint> PathList;
     public List<Unit> UnitList;
     public BaseUnit unitFunc;
-    public int counter;
-    public int counterTotal;
     public int waveNum;
+    public bool isCompleted;
     // Start is called before the first frame update
     void Start()
     {
-        counter = counterTotal;
+        isCompleted = false;
         waveNum = 1;
         UnitList = new List<Unit>();
         UnitLeftEvent.RegisterListener(UnitLeftLevelEvent);
         UnitDefeatedEvent.RegisterListener(onUnitDefeated);
         UnitCapturedEvent.RegisterListener(onUnitCaptured);
+        SpawnEnemyInPathEvent.RegisterListener(onSpawnEnemyInPath);
+        setContainer();
+    }
+
+    private void setContainer() {
+        if (segmentContainers.Count < waveNum) {
+            isCompleted = true;
+            return;
+        }
+        currentContainer = segmentContainers[waveNum - 1];
+        currentContainer.Init();
+    }
+
+    // When the spawn enemy in path event is called, we will spawn the enemy
+    public int onSpawnEnemyInPath(UnitProfile profile, int pathNum) {
+        var path = PathList[pathNum];
+        // Do some pooling here
+        var enemyUnit = GetFromPool(profile);
+        if (enemyUnit != null) spawnEnemy(enemyUnit, path);
+        else spawnEnemyOnPath(profile, path);
+        return 1;
+    }
+
+    private Unit GetFromPool(UnitProfile profile) {
+         if (UnitList.Count > 0) {
+            // TODO: Actually look at enemy profile to check to see if we can use this unit
+            var unit = UnitList[0];
+            UnitList.RemoveAt(0);
+            return unit;
+        }
+
+        return null;
+    }
+
+    private void AddToPool(Unit unit) {
+        UnitList.Add(unit);
     }
 
     void spawnEnemyOnPath(UnitProfile profile, Waypoint path) {
@@ -36,23 +67,14 @@ public class LevelWave : MonoBehaviour
     }
 
     void Update() {
-        if (counter > 0) {
-            counter--;
+        if (isCompleted) return;
+        if (currentContainer.isCompleted) {
+            waveNum++;
+            setContainer();
             return;
         }
-        counter = counterTotal;
-        if (waveNum == 1) {
-            waveNum++;
-            spawnEnemyOnPath(profile1, Path1);
-        }
 
-        if (UnitList.Count > 0) {
-            
-            var unit = UnitList[0];
-            UnitList.RemoveAt(0);
-            //Destroy(unit.gameObject);
-           spawnEnemy(unit, Path1);
-        }
+        currentContainer.Run();
     }
 
     private void spawnEnemy(Unit whichUnit, Waypoint path) {
@@ -66,17 +88,17 @@ public class LevelWave : MonoBehaviour
 
     public int UnitLeftLevelEvent(Unit whichUnit) {
         whichUnit.doHide();
-        UnitList.Add(whichUnit);
+        AddToPool(whichUnit);
         return 0;
     }
 
     public int onUnitDefeated(Unit whichUnit) {
-        UnitList.Add(whichUnit);
+        AddToPool(whichUnit);
         return 0;
     }
 
     public int onUnitCaptured(Unit whichUnit) {
-        UnitList.Add(whichUnit);
+        AddToPool(whichUnit);
         return 0;
     }
 }
