@@ -39,6 +39,7 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
     public IntEvent StartTowerDrag;
     public BasicEvent EndTowerDrag;
     public BoxCollider dragCollider;
+    public BaseUnit unitFunc;
 
     public int getID() {
         return id;
@@ -62,7 +63,7 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
     public void doInit(UnitProfile profile) {
         // set up info from profile given
         currentSpeed = profile.baseSpeed;
-        totalLife = profile.baseHP;
+        totalLife = unitFunc.calculateHP(profile);
         attackSelected = profile.attackSelected;
 
         // Unit is not battling yet

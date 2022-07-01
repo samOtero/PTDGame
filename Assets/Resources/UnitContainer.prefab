@@ -71,6 +71,7 @@ MonoBehaviour:
   StartTowerDrag: {fileID: 11400000, guid: 290c37b82dbd1364cacbd0d7cbb6ee27, type: 2}
   EndTowerDrag: {fileID: 11400000, guid: 1d8a2629240e2e04cb241ae16ca48e87, type: 2}
   dragCollider: {fileID: 0}
+  unitFunc: {fileID: 11400000, guid: 77fd125321b1f534e85367c82f98cf1e, type: 2}
 --- !u!114 &3530590146273277327
 MonoBehaviour:
   m_ObjectHideFlags: 0

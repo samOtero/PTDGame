@@ -19,9 +19,10 @@ MonoBehaviour:
   attack3ID: 0
   attack4ID: 0
   attackSelected: 0
-  lvl: 1
+  lvl: 5
   exp: 0
   special: 0
+  modHP: 1
   baseHP: 10
   baseAttack: 0
   baseSpAttack: 0

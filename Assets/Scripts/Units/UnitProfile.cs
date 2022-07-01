@@ -14,6 +14,8 @@ public class UnitProfile : ScriptableObject
     public int lvl;
     public int exp;
     public int special;
+    // Multiply inital HP by this to increase total HP, mainly used for enemy units
+    public int modHP;
     public int baseHP;
     public int baseAttack;
     public int baseSpAttack;
@@ -27,6 +29,33 @@ public class UnitProfile : ScriptableObject
     public List<ELMTTYPE> elements;
 
     public bool nonDamagingAttackOnly;
+
+    public UnitProfile(UnitProfile copyProfile=null) {
+        //If we are copying from another profile, copy all values
+        if (copyProfile != null) {
+            unitID = copyProfile.unitID;
+            nickname = copyProfile.nickname;
+            attack1ID = copyProfile.attack1ID;
+            attack2ID = copyProfile.attack2ID;
+            attack3ID = copyProfile.attack3ID;
+            attack4ID = copyProfile.attack4ID;
+            attackSelected = copyProfile.attackSelected;
+            lvl = copyProfile.lvl;
+            exp = copyProfile.exp;
+            special = copyProfile.special;
+            modHP = copyProfile.modHP;
+            baseHP = copyProfile.baseHP;
+            baseAttack = copyProfile.baseAttack;
+            baseSpAttack = copyProfile.baseSpAttack;
+            baseDefense = copyProfile.baseDefense;
+            baseSpDefense = copyProfile.baseSpDefense;
+            baseSpeed = copyProfile.baseSpeed;
+            freeRoam = copyProfile.freeRoam;
+            canCaptureCandy = copyProfile.canCaptureCandy;
+            elements = new List<ELMTTYPE>(copyProfile.elements);
+            nonDamagingAttackOnly = copyProfile.nonDamagingAttackOnly;
+        }
+    }
 
     public static void getBaseValues(UnitProfile profile) {
         var baseInfo = GetBaseInfo(profile.unitID);

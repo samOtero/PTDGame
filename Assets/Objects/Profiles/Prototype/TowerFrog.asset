@@ -19,10 +19,17 @@ MonoBehaviour:
   attack3ID: 0
   attack4ID: 0
   attackSelected: 0
-  lvl: 1
+  lvl: 5
   exp: 0
   special: 0
+  modHP: 1
   baseHP: 10
+  baseAttack: 49
+  baseSpAttack: 65
+  baseDefense: 49
+  baseSpDefense: 65
   baseSpeed: 7
   freeRoam: 0
+  canCaptureCandy: 0
+  elements: 0500000006000000
   nonDamagingAttackOnly: 0
