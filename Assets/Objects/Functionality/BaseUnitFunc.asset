@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: BaseUnitFunc
   m_EditorClassIdentifier: 
   EnemyFollowPath: {fileID: 3878375010163016027, guid: 9f9b042eb9c7c094bb7cb6a425e248a6, type: 3}
+  TowerTemplate: {fileID: 4656894821810783984, guid: 2ff6b753a129588428dc854d277c4939, type: 3}

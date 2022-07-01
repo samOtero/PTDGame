@@ -1557,6 +1557,7 @@ MonoBehaviour:
   currentParty: {fileID: 11400000, guid: 16f87b819b7da344b897b3fc9f583818, type: 2}
   AddedToParty: {fileID: 11400000, guid: 3ee01b4410365b041b09beeb57de1306, type: 2}
   UnitCapturedEvent: {fileID: 11400000, guid: f77cec3988eae6745b00a667a21340a9, type: 2}
+  unitFunc: {fileID: 11400000, guid: 77fd125321b1f534e85367c82f98cf1e, type: 2}
 --- !u!4 &1294913648
 Transform:
   m_ObjectHideFlags: 0

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PartyManager : MonoBehaviour
 {
-    public GameObject TowerTemplate;
     public UnitParty currentParty;
     public IntEvent AddedToParty;
     public UnitEvent UnitCapturedEvent;
+    public BaseUnit unitFunc;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +23,7 @@ public class PartyManager : MonoBehaviour
             var container = currentParty.party[i];
             if (container.unit) Destroy(container.unit);
             if (container.profile == null) continue; // skip if we have no profile on this spot
-            container.unit = CreateTower(container.profile, i);
+            container.unit = unitFunc.CreateTower(container.profile, unitFunc.TowerTemplate, i);
             container.hasBeenCreated = true;
        }
 
@@ -57,7 +57,7 @@ public class PartyManager : MonoBehaviour
        // Create a new unit and add it to our party
        var container = currentParty.party[emptySpot];
        container.profile = profile;
-       container.unit = CreateTower(profile, emptySpot);
+       container.unit = unitFunc.CreateTower(profile, unitFunc.TowerTemplate, emptySpot);
        container.hasBeenCreated = true;
 
        // Send event that we have added to party
@@ -70,29 +70,5 @@ public class PartyManager : MonoBehaviour
             if (container.hasBeenCreated == false) return i;
         }
         return -1;
-    }
-
-    // Create unit from a profile
-    private Unit CreateTower(UnitProfile profile, int partyPosition) {
-        var unitTemplate = TowerTemplate; //Would get which template we need from the profile, for now we just have only one
-        var newUnit = Instantiate(unitTemplate, transform);
-        var unitGfxName = UnitProfile.GetWholeUnitGfxName(profile.unitID);
-        newUnit.name = "Tower_"+unitGfxName;
-
-        // Get graphic resource
-        var graphicResourceName = "unitGfx/"+unitGfxName;
-        var unitGfx = Object.Instantiate(Resources.Load(graphicResourceName), newUnit.transform) as GameObject;
-        unitGfx.name = "unitGfx";
-
-        // Add default values to profile
-        // this will probably move higher up the chain once more is built out
-        UnitProfile.getBaseValues(profile);
-
-        //Set unit script
-        var unitScript = newUnit.GetComponent<Unit>();
-        unitScript.doInit(profile);
-        unitScript.partyPos = partyPosition;
-
-        return unitScript;
     }
 }

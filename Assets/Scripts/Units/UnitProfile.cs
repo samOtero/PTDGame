@@ -52,7 +52,7 @@ public class UnitProfile : ScriptableObject
             baseSpeed = copyProfile.baseSpeed;
             freeRoam = copyProfile.freeRoam;
             canCaptureCandy = copyProfile.canCaptureCandy;
-            elements = new List<ELMTTYPE>(copyProfile.elements);
+            elements = copyProfile.elements == null ? new List<ELMTTYPE>() : new List<ELMTTYPE>(copyProfile.elements);
             nonDamagingAttackOnly = copyProfile.nonDamagingAttackOnly;
         }
     }

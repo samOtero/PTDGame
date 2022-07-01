@@ -9,14 +9,28 @@ public class BaseUnit : ScriptableObject
     // Base enemy that will follow path and get candy
     public GameObject EnemyFollowPath;
 
+    // Base Tower gameobject ref
+    public GameObject TowerTemplate;
+
 
     // Create enemy unit from a profile
     public Unit CreateEnemy(UnitProfile profile, GameObject unitTemplate) {
+        return CreateUnit(profile, unitTemplate, "Enemy_");
+    }
+
+    public Unit CreateTower(UnitProfile profile, GameObject unitTemplate, int partyPosition) {
+        var unit = CreateUnit(profile, unitTemplate, "Tower_");
+        unit.partyPos = partyPosition; // Add the party position
+        return unit;
+    }
+
+    // Create enemy unit from a profile
+    public Unit CreateUnit(UnitProfile profile, GameObject unitTemplate, string prefix) {
         // Create new copy of profile for this unit
         var newProfile = new UnitProfile(profile);
         var newUnit = Instantiate(unitTemplate);
         var unitGfxName = UnitProfile.GetWholeUnitGfxName(newProfile.unitID);
-        newUnit.name = "Enemy_"+unitGfxName;
+        newUnit.name = prefix+unitGfxName;
 
         // Get graphic resource
         var graphicResourceName = "unitGfx/"+unitGfxName;
