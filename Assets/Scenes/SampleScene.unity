@@ -155,16 +155,20 @@ MonoBehaviour:
   UnitLeftEvent: {fileID: 11400000, guid: b3943d2a975a94546b36fe35990302e2, type: 2}
   UnitDefeatedEvent: {fileID: 11400000, guid: 09522cd547de67c42bbdaf82ca1f1423, type: 2}
   UnitCapturedEvent: {fileID: 11400000, guid: f77cec3988eae6745b00a667a21340a9, type: 2}
-  Path1: {fileID: 2439785642903266791}
-  Path2: {fileID: 0}
-  Path3: {fileID: 0}
-  Path4: {fileID: 0}
-  profile1: {fileID: 11400000, guid: 0668a0113acdb9642943e6779ec033f7, type: 2}
+  SpawnEnemyInPathEvent: {fileID: 11400000, guid: 0bffa813c37d3e745be07e9135249f39, type: 2}
+  segmentContainers:
+  - {fileID: 11400000, guid: a4386027e9eba1b4a829cf7dfd4cf61f, type: 2}
+  - {fileID: 11400000, guid: 2b536dfb87712504b9564b398c597ed9, type: 2}
+  - {fileID: 11400000, guid: 758e7a356f3bb7843856af604983342e, type: 2}
+  - {fileID: 11400000, guid: 541da1d0ac6bd9b41ba4259b5324362d, type: 2}
+  - {fileID: 11400000, guid: c92e49c304a27054ab557ee19365a77f, type: 2}
+  currentContainer: {fileID: 0}
+  PathList:
+  - {fileID: 2439785642903266791}
   UnitList: []
   unitFunc: {fileID: 11400000, guid: 77fd125321b1f534e85367c82f98cf1e, type: 2}
-  counter: 0
-  counterTotal: 5
   waveNum: 0
+  isCompleted: 0
 --- !u!4 &132390263
 Transform:
   m_ObjectHideFlags: 0
@@ -1553,7 +1557,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ffa1052ba4fa9c4ea6faad795c3db28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerTemplate: {fileID: 4656894821810783984, guid: 2ff6b753a129588428dc854d277c4939, type: 3}
   currentParty: {fileID: 11400000, guid: 16f87b819b7da344b897b3fc9f583818, type: 2}
   AddedToParty: {fileID: 11400000, guid: 3ee01b4410365b041b09beeb57de1306, type: 2}
   UnitCapturedEvent: {fileID: 11400000, guid: f77cec3988eae6745b00a667a21340a9, type: 2}

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc487a93a51ba1e48b17265f3cb1aee3, type: 3}
+  m_Name: L0_S2
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: 0668a0113acdb9642943e6779ec033f7, type: 2}
+  pathNum: 0
+  totalUnits: 2
+  startDelay: 600
+  betweenDelay: 72
+  isCompleted: 1
+  SpawnEnemyInPathEvent: {fileID: 11400000, guid: 0bffa813c37d3e745be07e9135249f39, type: 2}
