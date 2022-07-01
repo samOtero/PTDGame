@@ -3,13 +3,11 @@ using UnityEngine;
 
 public class LevelWave : MonoBehaviour
 {
-    public GameObject EnemyFollowPath1;
     public UnitEvent UnitLeftEvent;
     public UnitEvent UnitDefeatedEvent;
 
     public UnitEvent UnitCapturedEvent;
     public Waypoint Path1;
-
     public Waypoint Path2;
     public Waypoint Path3;
     public Waypoint Path4;
@@ -17,6 +15,7 @@ public class LevelWave : MonoBehaviour
     public UnitProfile profile1;
 
     public List<Unit> UnitList;
+    public BaseUnit unitFunc;
     public int counter;
     public int counterTotal;
     public int waveNum;
@@ -31,31 +30,8 @@ public class LevelWave : MonoBehaviour
         UnitCapturedEvent.RegisterListener(onUnitCaptured);
     }
 
-    // Create enemy unit from a profile
-    Unit CreateEnemy(UnitProfile profile) {
-        var unitTemplate = EnemyFollowPath1; //Would get which template we need from the profile, for now we just have only one
-        var newUnit = Instantiate(unitTemplate);
-        var unitGfxName = UnitProfile.GetWholeUnitGfxName(profile.unitID);
-        newUnit.name = "Enemy_"+unitGfxName;
-
-        // Get graphic resource
-        var graphicResourceName = "unitGfx/"+unitGfxName;
-        var unitGfx = Object.Instantiate(Resources.Load(graphicResourceName), newUnit.transform) as GameObject;
-        unitGfx.name = "unitGfx";
-
-        // Add default values to profile
-        // this will probably move higher up the chain once more is built out
-        UnitProfile.getBaseValues(profile);
-
-        //Set unit script
-        var unitScript = newUnit.GetComponent<Unit>();
-        unitScript.doInit(profile);
-
-        return unitScript;
-    }
-
     void spawnEnemyOnPath(UnitProfile profile, Waypoint path) {
-        var unit = CreateEnemy(profile);
+        var unit = unitFunc.CreateEnemy(profile, unitFunc.EnemyFollowPath);
         spawnEnemy(unit, path);
     }
 

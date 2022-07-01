@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb77bd5bf3a4ba64b9643b02d343f2fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyFollowPath1: {fileID: 3878375010163016027, guid: 9f9b042eb9c7c094bb7cb6a425e248a6, type: 3}
   UnitLeftEvent: {fileID: 11400000, guid: b3943d2a975a94546b36fe35990302e2, type: 2}
   UnitDefeatedEvent: {fileID: 11400000, guid: 09522cd547de67c42bbdaf82ca1f1423, type: 2}
   UnitCapturedEvent: {fileID: 11400000, guid: f77cec3988eae6745b00a667a21340a9, type: 2}
@@ -162,6 +161,7 @@ MonoBehaviour:
   Path4: {fileID: 0}
   profile1: {fileID: 11400000, guid: 0668a0113acdb9642943e6779ec033f7, type: 2}
   UnitList: []
+  unitFunc: {fileID: 11400000, guid: 77fd125321b1f534e85367c82f98cf1e, type: 2}
   counter: 0
   counterTotal: 5
   waveNum: 0
