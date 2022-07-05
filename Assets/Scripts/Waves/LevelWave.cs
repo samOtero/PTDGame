@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class LevelWave : MonoBehaviour
 {
+    public IntVariable PauseStatus;
+    public BasicEvent DoRun;
     public UnitEvent UnitLeftEvent;
     public UnitEvent UnitDefeatedEvent;
     public UnitEvent UnitCapturedEvent;
@@ -24,6 +26,7 @@ public class LevelWave : MonoBehaviour
         UnitDefeatedEvent.RegisterListener(onUnitDefeated);
         UnitCapturedEvent.RegisterListener(onUnitCaptured);
         SpawnEnemyInPathEvent.RegisterListener(onSpawnEnemyInPath);
+        DoRun.RegisterListener(onDoRun);
         setContainer();
     }
 
@@ -66,15 +69,17 @@ public class LevelWave : MonoBehaviour
         spawnEnemy(unit, path);
     }
 
-    void Update() {
-        if (isCompleted) return;
+    public int onDoRun() {
+        if (PauseStatus.Value > 0) return 0; // Don't run if the game is paused
+        if (isCompleted) return 0;
         if (currentContainer.isCompleted) {
             waveNum++;
             setContainer();
-            return;
+            return 1;
         }
 
         currentContainer.Run();
+        return 1;
     }
 
     private void spawnEnemy(Unit whichUnit, Waypoint path) {
