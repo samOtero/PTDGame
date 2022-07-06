@@ -165,7 +165,7 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
        if (newFade >= 1) {
            MaterialUtil.ToOpaqueMode(graphicMaterial);
        }else{
-           MaterialUtil.ToFadeMode(graphicMaterial);
+           MaterialUtil.ToFadeMode(graphicMaterial, newFade);
        }
     }
 

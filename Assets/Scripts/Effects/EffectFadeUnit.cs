@@ -20,7 +20,7 @@ public class EffectFadeUnit : Effect
 
         if (fadeTarget.isAlive == false) return;
         
-        fadeTarget.doFade(0.5f);
+        fadeTarget.doFade(0.2f);
         didFade = true;
     }
 

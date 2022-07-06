@@ -14,9 +14,10 @@ public static class MaterialUtil
         material.DisableKeyword("_ALPHABLEND_ON");
         material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
         material.renderQueue = -1;
+        material.color = new Color(1, 1, 1, 1f);
     }
    
-    public static void ToFadeMode(this Material material)
+    public static void ToFadeMode(this Material material, float fadeAmount = 0.5f)
     {
         material.SetOverrideTag("RenderType", "Transparent");
         material.SetInt("_SrcBlend", (int) UnityEngine.Rendering.BlendMode.SrcAlpha);
@@ -26,5 +27,6 @@ public static class MaterialUtil
         material.EnableKeyword("_ALPHABLEND_ON");
         material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
         material.renderQueue = (int) UnityEngine.Rendering.RenderQueue.Transparent;
+        material.color = new Color(1, 1, 1, fadeAmount);
     }
 }
