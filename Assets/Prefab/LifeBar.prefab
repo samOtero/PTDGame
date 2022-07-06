@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraToFace: {fileID: 0}
+  DoRun: {fileID: 11400000, guid: 51ad0ea913bd05041a6ae62cfcc3674e, type: 2}
 --- !u!114 &1880915182413646215
 MonoBehaviour:
   m_ObjectHideFlags: 0

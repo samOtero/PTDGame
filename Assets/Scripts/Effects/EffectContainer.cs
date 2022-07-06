@@ -12,15 +12,18 @@ public class EffectContainer : MonoBehaviour, IEffectContainer
      public EffectEvent addEffectEvent;
      
      public IntVariable PauseStatus;
+     public BasicEvent DoRun;
 
     void Start() {
          addEffectEvent.RegisterListener(onAddEffectEvent);
+         DoRun.RegisterListener(onDoRun);
     }
 
-    void Update() {
-        if (PauseStatus.Value > 0) return;
+    public int onDoRun() {
+        if (PauseStatus.Value > 0) return 0;
         
         doRunEffects();
+        return 1;
     }
 
     public int onAddEffectEvent(Effect whichEffect) {

@@ -110,6 +110,7 @@ public class ProjectileBasicFunc : ScriptableObject
                   //  targetUnit.myFunctionality.AddEffect(targetUnit, effect);
         }
         //Get rid of projectile, probably want to do some kind of pool instead
+        holder.doRemove();
         Destroy(holder.gameObject);
     }
 

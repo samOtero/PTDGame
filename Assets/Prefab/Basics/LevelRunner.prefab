@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoRun: {fileID: 11400000, guid: 51ad0ea913bd05041a6ae62cfcc3674e, type: 2}
+  SetRunSpeed: {fileID: 11400000, guid: 2a0cdf99d505f804b8330c12e931f61e, type: 2}
   levelSpeed: 1

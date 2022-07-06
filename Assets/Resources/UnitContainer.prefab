@@ -88,6 +88,7 @@ MonoBehaviour:
   createAttackEvent: {fileID: 11400000, guid: d3a59567dcf546a42acf207eff5f08ab, type: 2}
   isInit: 0
   PauseStatus: {fileID: 11400000, guid: a264ff026ea714e449ebd2932560c752, type: 2}
+  DoRun: {fileID: 11400000, guid: 51ad0ea913bd05041a6ae62cfcc3674e, type: 2}
 --- !u!65 &5726229198619899570
 BoxCollider:
   m_ObjectHideFlags: 0
