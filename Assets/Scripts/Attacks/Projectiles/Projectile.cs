@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour
     public Effect_Trigger_Remove OnHitEffect;
     public ProjectileBasicFunc func;
     public EffectEvent addEffectEvent;
+    public BasicEvent DoRun;
     public Animator animator;
     public bool paused;
     public bool isInit;
@@ -34,11 +35,20 @@ public class Projectile : MonoBehaviour
             addEffectEvent.Raise(OnHitEffect);
         }
         isInit = true;
+        DoRun.RegisterListener(onDoRun); // register to level runner
     }
 
-    void Update()
+    public void doRemove() {
+        if (isInit) {
+            DoRun.UnregisterListener(onDoRun); // unregister from level runner
+        }
+    }
+
+    public int onDoRun()
     {
         if (isInit)
-            func.doRun(this);       
+            func.doRun(this);
+
+        return 1;       
     } 
 }

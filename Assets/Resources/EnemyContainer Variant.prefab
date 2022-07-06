@@ -27,6 +27,8 @@ MonoBehaviour:
   UnitLeftEvent: {fileID: 11400000, guid: b3943d2a975a94546b36fe35990302e2, type: 2}
   PauseStatus: {fileID: 11400000, guid: a264ff026ea714e449ebd2932560c752, type: 2}
   candyList: {fileID: 11400000, guid: aa6b95dcb1e7fcd4f8bb636847b7a01a, type: 2}
+  DoRun: {fileID: 11400000, guid: 51ad0ea913bd05041a6ae62cfcc3674e, type: 2}
+  isEventRegistered: 0
 --- !u!1001 &3277671292079980030
 PrefabInstance:
   m_ObjectHideFlags: 0

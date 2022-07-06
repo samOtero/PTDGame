@@ -51,6 +51,8 @@ MonoBehaviour:
   faceTarget: 0
   func: {fileID: 11400000, guid: 9f8d2ab1713468d4c9a5dc6510879d55, type: 2}
   addEffectEvent: {fileID: 11400000, guid: ff0e2bb4a44fe1146bd5bf246c8e083c, type: 2}
+  DoRun: {fileID: 11400000, guid: 51ad0ea913bd05041a6ae62cfcc3674e, type: 2}
   animator: {fileID: 0}
   paused: 0
   isInit: 0
+  gfx: {fileID: 0}

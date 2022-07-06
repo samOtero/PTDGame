@@ -17,6 +17,8 @@ public class WayPointFollower : MonoBehaviour
     public UnitEvent UnitLeftEvent;
     public IntVariable PauseStatus;
     public CandyRuntimeCollection candyList;
+    public BasicEvent DoRun;
+    public bool isEventRegistered;
 
     public void reset(Waypoint startPoint) {
         if (myUnit == null) myUnit = gameObject.GetComponent<Unit>(); //lazy load
@@ -26,6 +28,10 @@ public class WayPointFollower : MonoBehaviour
         turnedAround = false;
         canCaptureCandy = myUnit.profile.canCaptureCandy;
         setNewPoint(initialPoint);
+        if (isEventRegistered == false) {
+            DoRun.RegisterListener(onDoRun);
+            isEventRegistered = true;
+        }
     }
 
     private void setNewPoint(Waypoint newPoint) {
@@ -121,13 +127,14 @@ public class WayPointFollower : MonoBehaviour
         return null;
     }
 
-    void Update() {
-        if (PauseStatus.Value > 0) return;
-        if (myUnit == null) return;
-        if (currentPoint == null) return;
+    public int onDoRun() {
+        if (PauseStatus.Value > 0) return 0;
+        if (myUnit == null) return 0;
+        if (currentPoint == null) return 0;
         myUnit.positionRef.transform.Translate(directionVector * Time.deltaTime * myUnit.currentSpeed);
         checkIfReachedPoint();
         if (canCaptureCandy && !hasCandy) checkForCandy();
+        return 1;
     }
 
     private bool checkIfReachedPoint() {
