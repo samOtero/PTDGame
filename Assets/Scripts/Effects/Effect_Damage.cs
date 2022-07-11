@@ -21,7 +21,7 @@ public class Effect_Damage : EffectForUnit
 
         //Damage target, if they aren't dead
         if (target.getID() == targetID) //ensure this is still the same target and not a pooled one
-            target.takeDamage(amount);
+            target.takeDamage(amount, fromWho);
 
         //Remove this effect
         needRemove = true;

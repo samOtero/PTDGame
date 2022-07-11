@@ -8,15 +8,21 @@ public class TowerBtn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     public BasicEvent EndTowerDrag;
     public BasicEvent DoTowerDrag;
     public Text UnitNickName;
+    public Text UnitLevel;
+    public GameObject ExpGroup;
+    public Text UnitExp;
+    public Transform expBar;
     public int partyPosition;
     public UnitParty currentParty;
     public UnitProfile currentProfile;
     public GameObject unitGfxContainer;
     public bool isEmpty;
     public IntEvent AddedToParty;
+    public UnitEvent UnitGotExperience;
 
     private void Start() {
         AddedToParty.RegisterListener(onAddedToParty);
+        UnitGotExperience.RegisterListener(onUnitGotExperience);
         init();
     }
 
@@ -27,15 +33,35 @@ public class TowerBtn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
             if (currentProfile == null) {
                 isEmpty = true;
                 UnitNickName.text = "Empty";
+                UnitLevel.text = "";
+                UnitExp.text = "";
+                ExpGroup.SetActive(false);
             }else{
                 isEmpty = false;
                 UnitNickName.text = currentProfile.nickname; // Assign unit's nickname to button text
+                updateExperience(); // Update level and exp bar
                 UIUtil.setUnitGfx(currentProfile.unitID, unitGfxContainer.transform); // Set Button Unit Graphic
                 // Set scale but graphic based on profile
                 var unitBaseInfo = UnitProfile.GetBaseInfo(currentProfile.unitID);
                 unitGfxContainer.transform.localScale = new Vector3(unitBaseInfo.UIScale, unitBaseInfo.UIScale, unitBaseInfo.UIScale);
             }
         }
+    }
+
+    public int onUnitGotExperience(Unit whichUnit) {
+        if (whichUnit.profile != currentProfile) return 0; // only interested in my unit
+        //Update level and experience bar
+        updateExperience();
+        return 1;
+    }
+
+    private void updateExperience() {
+        UnitLevel.text = "Lvl " + currentProfile.lvl;
+        ExpGroup.SetActive(true);
+        UnitExp.text = "Exp";
+        var newScale = expBar.localScale;
+        newScale.x = currentProfile.experiencePercent;
+        expBar.localScale = newScale;
     }
 
     // Called when a unit is added to the party mid level

@@ -15,19 +15,20 @@ public class BaseUnit : ScriptableObject
 
     // Create enemy unit from a profile
     public Unit CreateEnemy(UnitProfile profile, GameObject unitTemplate) {
-        return CreateUnit(profile, unitTemplate, "Enemy_");
+         // Create new copy of profile for this unit
+        var newProfile = new UnitProfile(profile);
+        return CreateUnit(newProfile, unitTemplate, "Enemy_");
     }
 
     public Unit CreateTower(UnitProfile profile, GameObject unitTemplate, int partyPosition) {
+        // Want to keep the party profile the same for the unit
         var unit = CreateUnit(profile, unitTemplate, "Tower_");
         unit.partyPos = partyPosition; // Add the party position
         return unit;
     }
 
     // Create enemy unit from a profile
-    public Unit CreateUnit(UnitProfile profile, GameObject unitTemplate, string prefix) {
-        // Create new copy of profile for this unit
-        var newProfile = new UnitProfile(profile);
+    private Unit CreateUnit(UnitProfile newProfile, GameObject unitTemplate, string prefix) {
         var newUnit = Instantiate(unitTemplate);
         var unitGfxName = UnitProfile.GetWholeUnitGfxName(newProfile.unitID);
         newUnit.name = prefix+unitGfxName;
@@ -54,5 +55,53 @@ public class BaseUnit : ScriptableObject
 		newHP +=  10 + profile.lvl;
         newHP *= profile.modHP; // Multiply by modifier
         return newHP;
+    }
+
+    // Give experience to a unit, returns true if they leveled up
+    public bool receiveExperience(UnitProfile profile, int exp) {
+        var leveledUp = false;
+        var expToNextLevel = getExpNeededToLevel(profile.lvl);
+        profile.currentExperience += exp;
+        if (profile.currentExperience >= expToNextLevel) {
+            profile.currentExperience -= expToNextLevel;
+            profile.lvl++; // This could be refactored actually
+            leveledUp = true;
+            expToNextLevel = getExpNeededToLevel(profile.lvl);
+        }
+
+        //Update experience percent
+        profile.experiencePercent = (float)profile.currentExperience / (float)expToNextLevel;
+        return leveledUp;
+    }
+
+    public int getExpNeededToLevel(int level) {
+        int expNeeded = (int)Mathf.Pow(level, 3); // Med Fast for everyone!
+        return expNeeded;
+    }
+
+    // Calculate experience based on profile
+    public int calculateExperience(UnitProfile profile, int totalHitMe, int highestLevelHitMe) {
+        int totalExp = 0;
+
+        if (profile.baseExperience == 0) return 0;
+
+        // Bonus if the unit cannot be captured
+        float isWildBonus = profile.canCaptureMe ? 1.0f : 1.5f;
+        int level = profile.lvl;
+        int baseExp = profile.baseExperience;
+        // See https://bulbapedia.bulbagarden.net/wiki/Experience for calculation
+        int calc1 = (int)(isWildBonus * baseExp * level);
+        int calc2 = calc1 / (5 * totalHitMe);
+
+        int calc3 = 2 * level + 10;
+        int calc4 = level + highestLevelHitMe + 10; //TODO: Remove highest level hit me
+        int calc5 = calc3 / calc4;
+        int calc6 = (int)Mathf.Pow(calc5, 2.5f);
+
+        int calc7 = calc6 * calc2;
+        int calc8 = calc7 + 1;
+
+        totalExp = calc8;
+        return totalExp;
     }
 }
