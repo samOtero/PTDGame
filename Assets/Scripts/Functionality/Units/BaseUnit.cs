@@ -91,17 +91,10 @@ public class BaseUnit : ScriptableObject
         int baseExp = profile.baseExperience;
         // See https://bulbapedia.bulbagarden.net/wiki/Experience for calculation
         int calc1 = (int)(isWildBonus * baseExp * level);
-        int calc2 = calc1 / (5 * totalHitMe);
+        int calc2 = calc1 / (7 * totalHitMe);
+        int calc3 = calc2 + 1;
 
-        int calc3 = 2 * level + 10;
-        int calc4 = level + highestLevelHitMe + 10; //TODO: Remove highest level hit me
-        int calc5 = calc3 / calc4;
-        int calc6 = (int)Mathf.Pow(calc5, 2.5f);
-
-        int calc7 = calc6 * calc2;
-        int calc8 = calc7 + 1;
-
-        totalExp = calc8;
+        totalExp = calc3;
         return totalExp;
     }
 }
