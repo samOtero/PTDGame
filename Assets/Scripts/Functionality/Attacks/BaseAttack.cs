@@ -20,7 +20,6 @@ public int getDamage(Unit attacker, Unit target, ELMTTYPE moveType, float stab, 
     // After we get damage apply weakness and stab bonuses
     int damage5 = (int)(damage4 * weakness * stab);
     totalDamage = damage5;
-    Debug.Log("Do Damage: " + totalDamage);
     return totalDamage;
 }
 

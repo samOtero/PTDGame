@@ -10,6 +10,7 @@ public class UnitBaseInfo
     public int baseSpAttack;
     public int baseSpDefense;
     public int baseSpeed;
+    public int baseExperience;
     public float UIScale;
 
     public List<ELMTTYPE> elements;

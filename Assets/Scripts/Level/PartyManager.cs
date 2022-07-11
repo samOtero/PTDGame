@@ -15,9 +15,7 @@ public class PartyManager : MonoBehaviour
         init();
     }
 
-    private void init() {
-       Debug.Log("initializing party...");
-       
+    private void init() {     
        // Loop through all the party spots and create a unit for each one
        for(var i=0; i < currentParty.party.Count; i++) {
             var container = currentParty.party[i];
@@ -26,8 +24,6 @@ public class PartyManager : MonoBehaviour
             container.unit = unitFunc.CreateTower(container.profile, unitFunc.TowerTemplate, i);
             container.hasBeenCreated = true;
        }
-
-       Debug.Log("party initialized");
     }
 
     // Called when a unit is captured, will try to add to party

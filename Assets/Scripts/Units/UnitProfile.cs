@@ -12,7 +12,6 @@ public class UnitProfile : ScriptableObject
     public AttackID attack4ID;
     public int attackSelected;
     public int lvl;
-    public int exp;
     public int special;
     // Multiply inital HP by this to increase total HP, mainly used for enemy units
     public int modHP;
@@ -22,10 +21,14 @@ public class UnitProfile : ScriptableObject
     public int baseDefense;
     public int baseSpDefense;
     public float baseSpeed;
+    public int baseExperience;
+    public int currentExperience;
+    public float experiencePercent;
     //Will unit leave the level after reaching the end of the path
     public bool freeRoam;
     // Can the unit capture candy
     public bool canCaptureCandy;
+    public bool canCaptureMe;
     public List<ELMTTYPE> elements;
 
     public bool nonDamagingAttackOnly;
@@ -41,7 +44,6 @@ public class UnitProfile : ScriptableObject
             attack4ID = copyProfile.attack4ID;
             attackSelected = copyProfile.attackSelected;
             lvl = copyProfile.lvl;
-            exp = copyProfile.exp;
             special = copyProfile.special;
             modHP = copyProfile.modHP;
             baseHP = copyProfile.baseHP;
@@ -50,11 +52,16 @@ public class UnitProfile : ScriptableObject
             baseDefense = copyProfile.baseDefense;
             baseSpDefense = copyProfile.baseSpDefense;
             baseSpeed = copyProfile.baseSpeed;
+            baseExperience = copyProfile.baseExperience;
             freeRoam = copyProfile.freeRoam;
             canCaptureCandy = copyProfile.canCaptureCandy;
             elements = copyProfile.elements == null ? new List<ELMTTYPE>() : new List<ELMTTYPE>(copyProfile.elements);
             nonDamagingAttackOnly = copyProfile.nonDamagingAttackOnly;
+            canCaptureMe = copyProfile.canCaptureMe;
         }
+
+        currentExperience = 0;
+        experiencePercent = 0.0f;
     }
 
     public static void getBaseValues(UnitProfile profile) {
@@ -63,6 +70,7 @@ public class UnitProfile : ScriptableObject
         profile.baseDefense = baseInfo.baseDefense;
         profile.baseSpAttack = baseInfo.baseSpAttack;
         profile.baseSpDefense = baseInfo.baseSpDefense;
+        profile.baseExperience = baseInfo.baseExperience;
         profile.elements = baseInfo.elements;
         // TODO: Add HP and Speed once those are implemented better
     }
@@ -80,6 +88,7 @@ public class UnitProfile : ScriptableObject
                 baseInfo.baseSpAttack = 25;
                 baseInfo.baseSpDefense = 35;
                 baseInfo.baseSpeed = 72;
+                baseInfo.baseExperience = 51;
                 baseInfo.UIScale = 37f;
                 break;
             case 1:
@@ -93,6 +102,7 @@ public class UnitProfile : ScriptableObject
                 baseInfo.baseSpAttack = 65;
                 baseInfo.baseSpDefense = 65;
                 baseInfo.baseSpeed = 45;
+                baseInfo.baseExperience = 64;
                 baseInfo.UIScale = 37f;
                 break;
         }

@@ -21,6 +21,7 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
 
     public UnitEvent UnitDefeatedEvent;
     public UnitEvent UnitCaptured;
+    public UnitEvent UnitGotExperience;
 
     public FloatVariable weaknessLevel;
 
@@ -40,6 +41,9 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
     public BasicEvent EndTowerDrag;
     public BoxCollider dragCollider;
     public BaseUnit unitFunc;
+
+    public List<Unit> hitMeList;
+    public int highestLevelHitMe;
 
     public int getID() {
         return id;
@@ -65,6 +69,7 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
         currentSpeed = profile.baseSpeed;
         totalLife = unitFunc.calculateHP(profile);
         attackSelected = profile.attackSelected;
+        highestLevelHitMe = 1;
 
         // Unit is not battling yet
         isBattling = false;
@@ -94,7 +99,8 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
         setLife(totalLife);
         id++; //increase id so we know this is no longer the same unit, this needs to come from a global value!
         isAlive = true;
-        isHidding = false;     
+        isHidding = false;
+        hitMeList = new List<Unit>();   
     }
 
     protected void setLife(int newLife) {
@@ -133,6 +139,8 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
         setLife(0);
         isAlive = false;
         if (pathFollower) pathFollower.dropCandy();
+        // Give experience to units that attacked me
+        giveExperience();
         doHide();
         UnitCaptured.Raise(this);
     }
@@ -169,8 +177,9 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
        }
     }
 
-    public int takeDamage(int howMuch) {
+    public int takeDamage(int howMuch, Unit fromWho) {
         if (isAlive == false) return 0;
+        AddToHitMeList(fromWho);
         var newLife = currentLife - howMuch;
         if (newLife <= 0){
             onDefeat();
@@ -180,10 +189,44 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
         return howMuch;
     }
 
+    // Add unit to the hit me list, so we can give them exp when defeated
+    private void AddToHitMeList(Unit fromWho) {
+        if (hitMeList.Contains(fromWho) == false) {
+            hitMeList.Add(fromWho);
+        }
+
+        // Update highest level hit me
+        if (fromWho.profile.lvl > highestLevelHitMe) {
+            highestLevelHitMe = fromWho.profile.lvl;
+        }
+    }
+
+    // This unit got experience
+    public void getExperience(int howMuch) {
+        var leveledUp = false;
+        var totalLevelUps = 0;
+        do {
+            leveledUp = unitFunc.receiveExperience(profile, howMuch);
+            if (leveledUp) totalLevelUps++;
+        }
+        while(leveledUp);
+        UnitGotExperience.Raise(this);
+    }
+
+    private void giveExperience() {
+        //TODO: Remove units that have fainted from the hit me list
+        var totalExp = unitFunc.calculateExperience(profile, hitMeList.Count, highestLevelHitMe);
+        foreach(var hitMe in hitMeList) {
+            hitMe.getExperience(totalExp);
+        }
+    }
+
     private void onDefeat() {
         setLife(0);
         isAlive = false;
         if (pathFollower) pathFollower.dropCandy();
+        // Give experience to units that attacked me
+        giveExperience();
         doHide();
         if (UnitDefeatedEvent) UnitDefeatedEvent.Raise(this);
     }

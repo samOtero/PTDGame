@@ -60,6 +60,7 @@ MonoBehaviour:
   graphicMaterial: {fileID: 0}
   UnitDefeatedEvent: {fileID: 11400000, guid: 09522cd547de67c42bbdaf82ca1f1423, type: 2}
   UnitCaptured: {fileID: 11400000, guid: f77cec3988eae6745b00a667a21340a9, type: 2}
+  UnitGotExperience: {fileID: 11400000, guid: daa2304e5a4ddc148be53281f959c153, type: 2}
   weaknessLevel: {fileID: 11400000, guid: 1281066ec05a7f34688423b3e8dc9e7b, type: 2}
   id: 1
   profile: {fileID: 0}
@@ -72,6 +73,7 @@ MonoBehaviour:
   EndTowerDrag: {fileID: 11400000, guid: 1d8a2629240e2e04cb241ae16ca48e87, type: 2}
   dragCollider: {fileID: 0}
   unitFunc: {fileID: 11400000, guid: 77fd125321b1f534e85367c82f98cf1e, type: 2}
+  hitMeList: []
 --- !u!114 &3530590146273277327
 MonoBehaviour:
   m_ObjectHideFlags: 0
