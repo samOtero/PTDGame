@@ -8,10 +8,13 @@ public class WaveSegmentContainer : ScriptableObject
 {
    public List<Wave_Segment> segments;
    public bool isCompleted;
+    public int startDelay;
+    public int counter;
 
-   public void Init()
+    public void Init()
    {
-    isCompleted = false;
+        counter = startDelay;
+        isCompleted = false;
       for (int i = 0; i < segments.Count; i++)
       {
          segments[i].Init();
@@ -20,6 +23,11 @@ public class WaveSegmentContainer : ScriptableObject
 
    public void Run() {
         if (isCompleted) return;
+        if (counter > 0)
+        {
+            counter--;
+            return;
+        }
 
         var allSegmentsCompleted = true;
         for (int i = 0; i < segments.Count; i++) {

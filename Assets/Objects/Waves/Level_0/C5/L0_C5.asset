@@ -15,3 +15,7 @@ MonoBehaviour:
   segments:
   - {fileID: 11400000, guid: d4eb7025b73c4944d9d5372aa733fdb5, type: 2}
   isCompleted: 0
+  allSegmentsCompleted: 0
+  startDelay: 600
+  endDelay: 0
+  counter: 0

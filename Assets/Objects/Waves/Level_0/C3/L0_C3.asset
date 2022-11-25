@@ -14,4 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   segments:
   - {fileID: 11400000, guid: 45d4e98f38e09244bb53cf4ac89f4ee7, type: 2}
-  isCompleted: 0
+  isCompleted: 1
+  allSegmentsCompleted: 1
+  startDelay: 600
+  endDelay: 0
+  counter: 0

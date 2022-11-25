@@ -15,7 +15,7 @@ MonoBehaviour:
   profile: {fileID: 11400000, guid: 0668a0113acdb9642943e6779ec033f7, type: 2}
   pathNum: 0
   totalUnits: 1
-  startDelay: 300
+  startDelay: 0
   betweenDelay: 0
   isCompleted: 1
   SpawnEnemyInPathEvent: {fileID: 11400000, guid: 0bffa813c37d3e745be07e9135249f39, type: 2}
