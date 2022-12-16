@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc487a93a51ba1e48b17265f3cb1aee3, type: 3}
   m_Name: L0_S3
   m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: 0668a0113acdb9642943e6779ec033f7, type: 2}
+  profile: {fileID: 11400000, guid: 41e2e304e9c011a44ac736deebc5db02, type: 2}
   pathNum: 0
   totalUnits: 3
   startDelay: 0
   betweenDelay: 72
-  isCompleted: 1
+  isCompleted: 0
   SpawnEnemyInPathEvent: {fileID: 11400000, guid: 0bffa813c37d3e745be07e9135249f39, type: 2}

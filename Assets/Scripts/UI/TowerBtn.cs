@@ -29,7 +29,8 @@ public class TowerBtn : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     public void init()  {
         //Use party position to init our graphic and nickname
         if (currentParty.party != null && partyPosition < currentParty.party.Count) {
-            currentProfile = currentParty.party[partyPosition].profile; // Grab profile from our party object
+            var currentPartyUnit = currentParty.party[partyPosition];
+            currentProfile = currentPartyUnit.getUnitProfile(); // Grab profile from our party object
             if (currentProfile == null) {
                 isEmpty = true;
                 UnitNickName.text = "Empty";

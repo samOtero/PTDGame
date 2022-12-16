@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   party:
   - unit: {fileID: 0}
-    profile: {fileID: 11400000, guid: e7ad7445ab8bff641bc4bf678a2840ef, type: 2}
+    profile: {fileID: 0}
+    profileTemp: {fileID: 11400000, guid: e635d6d8be0440342b8de438a2fc9951, type: 2}
     hasBeenCreated: 0
   - unit: {fileID: 0}
     profile: {fileID: 0}
+    profileTemp: {fileID: 0}
     hasBeenCreated: 0
   - unit: {fileID: 0}
     profile: {fileID: 0}
+    profileTemp: {fileID: 0}
     hasBeenCreated: 0

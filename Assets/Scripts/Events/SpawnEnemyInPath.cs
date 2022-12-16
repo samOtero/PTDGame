@@ -5,23 +5,23 @@ using UnityEngine;
 public class SpawnEnemyInPath : ScriptableObject, ISerializationCallbackReceiver
 {
 
-    public Func<UnitProfile, int, int> listener;
+    public Func<UnitProfileObj, int, int> listener;
 
     public void Reset()
     {
         listener = null;
     }
-    public void Raise(UnitProfile profile, int pathNum)
+    public void Raise(UnitProfileObj profile, int pathNum)
     {
         if (listener != null) listener(profile, pathNum);
     }
 
-    public void RegisterListener(Func<UnitProfile, int, int> listener)
+    public void RegisterListener(Func<UnitProfileObj, int, int> listener)
     {
         this.listener = listener;
     }
 
-    public void UnregisterListener(Func<UnitProfile, int, int> listener)
+    public void UnregisterListener(Func<UnitProfileObj, int, int> listener)
     {
        if (this.listener == listener) this.listener = null;
     }

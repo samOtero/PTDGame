@@ -1,17 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class Attack_Projectile : Attack
 {
-    public Attack_Projectile(Unit myUnit, AttackProfile profile, BaseAttack baseFunc, EffectEvent addEffectEvent): base(myUnit, profile, baseFunc, addEffectEvent) {}
-
     protected override int doAttackActual() {
-        Unit target = baseFunc.getTargetInRange(myUnit, targetList, range);
+        Unit target = getTargetInRange();
         if (target) {
             //Create projectile effect and trigger effects
-            baseFunc.faceTarget(myUnit, target);
-            var damageAmount = baseFunc.getDamage(myUnit, target, moveType, stab, power, isPhysical);
+            BaseAttack.faceTarget(myUnit, target);
+            var damageAmount = BaseAttack.getDamage(myUnit, target, moveType, stab, power, isPhysical);
             var damageFx = new Effect_Damage(target, myUnit, damageAmount, attackerNeedsAlive);
             var fadeFx = new EffectFadeUnit(myUnit);
             var trigger = new Effect_Trigger_Remove();

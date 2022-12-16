@@ -1,10 +1,8 @@
-using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(menuName = "Unit/Profile")]
-public class UnitProfile : ScriptableObject
+public class UnitProfile
 {
-    public int unitID;
+    public UnitID unitID;
     public string nickname;
     public AttackID attack1ID;
     public AttackID attack2ID;
@@ -33,7 +31,7 @@ public class UnitProfile : ScriptableObject
 
     public bool nonDamagingAttackOnly;
 
-    public UnitProfile(UnitProfile copyProfile=null) {
+    public UnitProfile(UnitProfileObj copyProfile=null) {
         //If we are copying from another profile, copy all values
         if (copyProfile != null) {
             unitID = copyProfile.unitID;
@@ -44,24 +42,20 @@ public class UnitProfile : ScriptableObject
             attack4ID = copyProfile.attack4ID;
             attackSelected = copyProfile.attackSelected;
             lvl = copyProfile.lvl;
-            special = copyProfile.special;
             modHP = copyProfile.modHP;
-            baseHP = copyProfile.baseHP;
-            baseAttack = copyProfile.baseAttack;
-            baseSpAttack = copyProfile.baseSpAttack;
-            baseDefense = copyProfile.baseDefense;
-            baseSpDefense = copyProfile.baseSpDefense;
-            baseSpeed = copyProfile.baseSpeed;
-            baseExperience = copyProfile.baseExperience;
             freeRoam = copyProfile.freeRoam;
             canCaptureCandy = copyProfile.canCaptureCandy;
-            elements = copyProfile.elements == null ? new List<ELMTTYPE>() : new List<ELMTTYPE>(copyProfile.elements);
             nonDamagingAttackOnly = copyProfile.nonDamagingAttackOnly;
             canCaptureMe = copyProfile.canCaptureMe;
+            baseSpeed = copyProfile.speed; // this should be temporary, should calculate based on base
+            baseHP = copyProfile.HP; // this should be temporary, should calculate based on base/lvl
         }
 
         currentExperience = 0;
         experiencePercent = 0.0f;
+
+        // Add base values
+        getBaseValues(this);
     }
 
     public static void getBaseValues(UnitProfile profile) {
@@ -75,10 +69,10 @@ public class UnitProfile : ScriptableObject
         // TODO: Add HP and Speed once those are implemented better
     }
 
-    public static UnitBaseInfo GetBaseInfo(int unitID) {
+    public static UnitBaseInfo GetBaseInfo(UnitID unitID) {
         UnitBaseInfo baseInfo = new UnitBaseInfo();
         switch(unitID) {
-            case 19:
+            case UnitID.RATTY:
                 baseInfo.gfxResourceName = "u0020_rat";
                 baseInfo.UnitResourceName = "unt_0020_rat";
                 baseInfo.elements = new List<ELMTTYPE>() { ELMTTYPE.NORMAL };
@@ -91,7 +85,7 @@ public class UnitProfile : ScriptableObject
                 baseInfo.baseExperience = 51;
                 baseInfo.UIScale = 37f;
                 break;
-            case 1:
+            case UnitID.FROGGY:
             default:
                 baseInfo.gfxResourceName = "u0001_frog";
                 baseInfo.UnitResourceName = "unt_0001_frog";
@@ -109,15 +103,15 @@ public class UnitProfile : ScriptableObject
         return baseInfo;
     }
 
-    public static string GetUnitGfxName(int unitID) {
+    public static string GetUnitGfxName(UnitID unitID) {
         var baseInfo = GetBaseInfo(unitID);
-        var name = baseInfo != null ? baseInfo.gfxResourceName : "";
+        var name = baseInfo.gfxResourceName;
         return name;
     }
 
-    public static string GetWholeUnitGfxName(int unitID) {
+    public static string GetWholeUnitGfxName(UnitID unitID) {
          var baseInfo = GetBaseInfo(unitID);
-        var name = baseInfo != null ? baseInfo.UnitResourceName : "";
+        var name = baseInfo.UnitResourceName;
         return name;
     }
 }

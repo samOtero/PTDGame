@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1f92a69bf917ea4194ba27d05fbd303, type: 3}
-  m_Name: BaseAttack
+  m_Script: {fileID: 11500000, guid: 023baccd6f772a247a0baa9b21807604, type: 3}
+  m_Name: DoCreateUnit
   m_EditorClassIdentifier: 
-  targetEnemy: 1
-  range: 3.3
-  initialCooldown: 0.2

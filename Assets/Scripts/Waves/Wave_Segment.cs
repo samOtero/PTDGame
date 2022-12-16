@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Wave/Segment")]
 public class Wave_Segment : ScriptableObject
 {
-   public UnitProfile profile;
+   public UnitProfileObj profile;
    public int pathNum;
    public int totalUnits;
    private int unitCount;

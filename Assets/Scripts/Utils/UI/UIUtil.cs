@@ -13,7 +13,7 @@ public static class UIUtil {
 
     // Will create and add UI Unit Graphic based on a given unitID to a given container
     // Used for Tower Button and Drag Unit 
-    public static void setUnitGfx(int unitID, Transform container) {
+    public static void setUnitGfx(UnitID unitID, Transform container) {
         //First Need to delete anything that is already there
         foreach (Transform child in container) {
              GameObject.Destroy(child.gameObject);

@@ -1,14 +1,12 @@
 using UnityEngine;
 using System;
 
-[CreateAssetMenu(menuName = "Functionality/Base Attack")]
-public class BaseAttack : ScriptableObject
+public class BaseAttack
 {
 
 // Calculate total damage done by an attack against a target
-public int getDamage(Unit attacker, Unit target, ELMTTYPE moveType, float stab, int movePower, bool isPhysical) {
-    var totalDamage = 0;
-    var weakness = getWeakness(moveType, target);
+public static int getDamage(Unit attacker, Unit target, ELMTTYPE moveType, float stab, int movePower, bool isPhysical) {
+    var weakness = BaseAttack.getWeakness(moveType, target);
     var attacker_attack = isPhysical ? attacker.profile.baseAttack : attacker.profile.baseSpAttack;
     var defender_defense = isPhysical ? target.profile.baseDefense : target.profile.baseSpDefense;
     var attacker_level = attacker.profile.lvl;
@@ -19,24 +17,24 @@ public int getDamage(Unit attacker, Unit target, ELMTTYPE moveType, float stab, 
     int damage4 = ((damage1 * damage2 * damage3)/ 50) + 2;
     // After we get damage apply weakness and stab bonuses
     int damage5 = (int)(damage4 * weakness * stab);
-    totalDamage = damage5;
+    int totalDamage = damage5;
     return totalDamage;
 }
 
 // Get total weakness of an attack against a target
-public float getWeakness(ELMTTYPE moveType, Unit defender) {
-    float weakness = checkTypeWeakness(moveType, defender);
+public static float getWeakness(ELMTTYPE moveType, Unit defender) {
+    float weakness = BaseAttack.checkTypeWeakness(moveType, defender);
     // Other effects to weakness will be added here
     return weakness;
 }
 
 // Apply type weakness to an attack against a target elements
-public float checkTypeWeakness(ELMTTYPE moveType, Unit defender) {
+public static float checkTypeWeakness(ELMTTYPE moveType, Unit defender) {
     float weakness = 1;
-    float currentWeakness = 1;
+    float currentWeakness;
     var defenderTypes = defender.profile.elements;
     foreach(var defenderType in defenderTypes) {
-        currentWeakness = checkTypes(moveType, defenderType);
+        currentWeakness = BaseAttack.checkTypes(moveType, defenderType);
         weakness *= currentWeakness;
     }
 
@@ -44,7 +42,7 @@ public float checkTypeWeakness(ELMTTYPE moveType, Unit defender) {
 }
 
 // Compare two types and return the weakness of the first type against the second type
-public float checkTypes(ELMTTYPE attackType, ELMTTYPE defenderType) {
+public static float checkTypes(ELMTTYPE attackType, ELMTTYPE defenderType) {
     // Normal VS
     if (attackType == ELMTTYPE.NORMAL) {
         if (defenderType == ELMTTYPE.STEEL) return 0.5f;
@@ -245,7 +243,7 @@ public float checkTypes(ELMTTYPE attackType, ELMTTYPE defenderType) {
 }
 
 // Get stab multiplier for a move and user
-public float getStabMultiplier(Unit attacker, ELMTTYPE movetype) {
+public static float getStabMultiplier(Unit attacker, ELMTTYPE movetype) {
     float stabAmount = 1;
     if (attacker.profile.elements.Contains(movetype)) {
         stabAmount = 1.5f;
@@ -253,7 +251,7 @@ public float getStabMultiplier(Unit attacker, ELMTTYPE movetype) {
     return stabAmount;
 }
 
-public void faceTarget(Unit attacker, ITargetable target) {
+public static void faceTarget(Unit attacker, ITargetable target) {
     var targetLoc = target.getLocation();
     var atkZ = attacker.positionRef.transform.position.z;
     var atkX = attacker.positionRef.transform.position.x;
@@ -276,7 +274,7 @@ public void faceTarget(Unit attacker, ITargetable target) {
     attacker.faceDirection(newDirection);
 }
 
-public Unit getTargetInRange(Unit attacker, UnitRuntimeCollection targetList, float range) {
+public static Unit getTargetInRange(Unit attacker, UnitRuntimeCollection targetList, float range) {
         Unit target = null;
 
         Vector2 attackerLoc = new Vector2(attacker.positionRef.transform.position.x, attacker.positionRef.transform.position.z);
@@ -298,7 +296,7 @@ public Unit getTargetInRange(Unit attacker, UnitRuntimeCollection targetList, fl
 
         return target;
     }
-    public float runCooldown(float timePassed, float currentCooldown) {
+    public static float runCooldown(float timePassed, float currentCooldown) {
         if (currentCooldown > 0) {
             currentCooldown -= timePassed;
         }

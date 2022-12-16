@@ -9,20 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3da0b77720127c4d803670729105780, type: 3}
-  m_Name: Dog1
+  m_Script: {fileID: 11500000, guid: 49b81b2b952c9fd4aa8224428f21827d, type: 3}
+  m_Name: Rat1
   m_EditorClassIdentifier: 
-  unitID: 0
-  unitGfxName: u0000_dog
+  unitID: 1
+  nickname: Ratty
   attack1ID: 1
   attack2ID: 0
   attack3ID: 0
   attack4ID: 0
   attackSelected: 0
-  lvl: 1
-  exp: 0
-  special: 0
-  baseHP: 10
-  baseSpeed: 7
+  lvl: 5
+  speed: 4
+  HP: 10
+  modHP: 1
   freeRoam: 0
+  canCaptureCandy: 1
+  canCaptureMe: 1
   nonDamagingAttackOnly: 1

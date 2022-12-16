@@ -40,7 +40,6 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
     public IntEvent StartTowerDrag;
     public BasicEvent EndTowerDrag;
     public BoxCollider dragCollider;
-    public BaseUnit unitFunc;
 
     public List<Unit> hitMeList;
     public int highestLevelHitMe;
@@ -67,7 +66,7 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
     public void doInit(UnitProfile profile) {
         // set up info from profile given
         currentSpeed = profile.baseSpeed;
-        totalLife = unitFunc.calculateHP(profile);
+        totalLife = BaseUnit.calculateHP(profile);
         attackSelected = profile.attackSelected;
         highestLevelHitMe = 1;
 
@@ -206,7 +205,7 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
         var leveledUp = false;
         var totalLevelUps = 0;
         do {
-            leveledUp = unitFunc.receiveExperience(profile, howMuch);
+            leveledUp = BaseUnit.receiveExperience(profile, howMuch);
             if (leveledUp) totalLevelUps++;
         }
         while(leveledUp);
@@ -215,7 +214,7 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
 
     private void giveExperience() {
         //TODO: Remove units that have fainted from the hit me list
-        var totalExp = unitFunc.calculateExperience(profile, hitMeList.Count, highestLevelHitMe);
+        var totalExp = BaseUnit.calculateExperience(profile, hitMeList.Count, highestLevelHitMe);
         foreach(var hitMe in hitMeList) {
             hitMe.getExperience(totalExp);
         }

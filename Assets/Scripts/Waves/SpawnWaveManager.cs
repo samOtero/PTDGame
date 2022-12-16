@@ -8,9 +8,9 @@ public class SpawnWaveManager : MonoBehaviour
     public UnitEvent UnitDefeatedEvent;
     public UnitEvent UnitCapturedEvent;
     public SpawnEnemyInPath SpawnEnemyInPathEvent;
+    public CreateUnitEvent CreateEnemyUnitEvent;
     public List<Waypoint> PathList;
     public List<Unit> UnitList;
-    public BaseUnit unitFunc;
 
     // Start is called before the first frame update
     void Start()
@@ -58,13 +58,14 @@ public class SpawnWaveManager : MonoBehaviour
     }
 
     // When the spawn enemy in path event is called, we will spawn the enemy
-    public int onSpawnEnemyInPath(UnitProfile profile, int pathNum)
+    public int onSpawnEnemyInPath(UnitProfileObj profile, int pathNum)
     {
         var path = PathList[pathNum];
         // Do some pooling here
-        var enemyUnit = GetFromPool(profile);
+        var newProfile = new UnitProfile(profile);
+        var enemyUnit = GetFromPool(newProfile);
         if (enemyUnit != null) spawnEnemy(enemyUnit, path);
-        else spawnEnemyOnPath(profile, path);
+        else spawnEnemyOnPath(newProfile, path);
         return 1;
     }
 
@@ -88,7 +89,7 @@ public class SpawnWaveManager : MonoBehaviour
 
     private void spawnEnemyOnPath(UnitProfile profile, Waypoint path)
     {
-        var unit = unitFunc.CreateEnemy(profile, unitFunc.EnemyFollowPath);
+        var unit = CreateEnemyUnitEvent.Raise(profile, TDUnitTypes.BASIC_ENEMY);
         spawnEnemy(unit, path);
     }
 }

@@ -9,27 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3da0b77720127c4d803670729105780, type: 3}
-  m_Name: TowerRat
+  m_Script: {fileID: 11500000, guid: 49b81b2b952c9fd4aa8224428f21827d, type: 3}
+  m_Name: TempFroggy
   m_EditorClassIdentifier: 
-  unitID: 19
-  nickname: Ratty
+  unitID: 0
+  nickname: Froggy
   attack1ID: 2
   attack2ID: 0
   attack3ID: 0
   attack4ID: 0
   attackSelected: 0
   lvl: 5
-  exp: 0
-  special: 0
+  speed: 4
+  HP: 10
   modHP: 1
-  baseHP: 10
-  baseAttack: 0
-  baseSpAttack: 0
-  baseDefense: 0
-  baseSpDefense: 0
-  baseSpeed: 7
   freeRoam: 0
   canCaptureCandy: 0
-  elements: 
+  canCaptureMe: 0
   nonDamagingAttackOnly: 0
