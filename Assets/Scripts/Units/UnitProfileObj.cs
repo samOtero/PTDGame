@@ -21,4 +21,5 @@ public class UnitProfileObj : ScriptableObject
     public bool canCaptureCandy = true;
     public bool canCaptureMe = true;
     public bool nonDamagingAttackOnly = true;
+    public int enemyTypeId;
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 public class UnitProfile
 {
     public UnitID unitID;
+    // Id for a particular type of enemy, used for pooling
+    public int enemyTypeId;
     public string nickname;
     public AttackID attack1ID;
     public AttackID attack2ID;
@@ -49,6 +51,7 @@ public class UnitProfile
             canCaptureMe = copyProfile.canCaptureMe;
             baseSpeed = copyProfile.speed; // this should be temporary, should calculate based on base
             baseHP = copyProfile.HP; // this should be temporary, should calculate based on base/lvl
+            enemyTypeId = copyProfile.enemyTypeId;
         }
 
         currentExperience = 0;

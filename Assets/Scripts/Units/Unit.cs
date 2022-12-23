@@ -6,7 +6,7 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
 {
     public bool isEnemy;
     public bool isAlive;
-    public bool isHidding;
+    // If the unit is in the level or not
     public bool isBattling;
     public int totalLife;
     public int currentLife;
@@ -26,6 +26,7 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
     public FloatVariable weaknessLevel;
 
     protected List<Func<float, int>> LifeChangeListeners;
+    // Makes enemy unit unique when using pooling
     public int id;
 
     public UnitProfile profile;
@@ -72,6 +73,7 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
 
         // Unit is not battling yet
         isBattling = false;
+        isAlive = false;
 
         this.profile = profile;
         // Add unit to it's respective list
@@ -91,14 +93,15 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
         StartTowerDrag.RegisterListener(onStartedTowerDrag);
         EndTowerDrag.RegisterListener(onEndedTowerDrag);
 
+        // auto reset when first creating the unit
         Reset();
+        doHide(); // Hide units out of screen when creating them
     }
 
     public void Reset() {
         setLife(totalLife);
         id++; //increase id so we know this is no longer the same unit, this needs to come from a global value!
         isAlive = true;
-        isHidding = false;
         hitMeList = new List<Unit>();   
     }
 
@@ -154,12 +157,11 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
         if (currentSpot) currentSpot.removeUnit(this);
         setIsBattling(false);
         currentSpot = null;
-        positionRef.transform.position = new Vector3(1000.0f, 500.0f, 0);
+        doHide();
     }
 
     // Hide Unit from view
     public void doHide() {
-        isHidding = true;
         positionRef.transform.position = new Vector3(1000.0f, 500.0f, 0);
     }
 
@@ -223,11 +225,19 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
     private void onDefeat() {
         setLife(0);
         isAlive = false;
+        setIsBattling(false);
         if (pathFollower) pathFollower.dropCandy();
         // Give experience to units that attacked me
         giveExperience();
         doHide();
         if (UnitDefeatedEvent) UnitDefeatedEvent.Raise(this);
+    }
+
+    // Used for enemies when they leave level
+    public void onLeaveLevel()
+    {
+        setIsBattling(false);
+        doHide();
     }
 
 
@@ -267,7 +277,7 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
     }
 
     public bool isTargetable() {
-        return isAlive && !isHidding && isBattling;
+        return isAlive && isBattling;
     }
 
     public Vector3 getLocation() {

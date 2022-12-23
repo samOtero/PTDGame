@@ -57,6 +57,7 @@ public class WayPointFollower : MonoBehaviour
                     hasCandy = false;
                     carriedCandy = null;
                 }
+                myUnit.onLeaveLevel();
                 if (UnitLeftEvent) UnitLeftEvent.Raise(myUnit);
             }
         }
@@ -129,7 +130,7 @@ public class WayPointFollower : MonoBehaviour
 
     public int onDoRun() {
         if (PauseStatus.Value > 0) return 0;
-        if (myUnit == null) return 0;
+        if (myUnit == null || myUnit.isBattling == false || myUnit.isAlive == false) return 0; // Don't move if we aren't battling
         if (currentPoint == null) return 0;
         myUnit.positionRef.transform.Translate(directionVector * Time.deltaTime * myUnit.currentSpeed);
         checkIfReachedPoint();

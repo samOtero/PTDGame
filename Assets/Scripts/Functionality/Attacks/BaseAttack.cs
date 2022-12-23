@@ -284,7 +284,7 @@ public static Unit getTargetInRange(Unit attacker, UnitRuntimeCollection targetL
         float deltaDistance;
         for(var i=0; i<targetList.Items.Count; i++) {
             currentTarget = targetList.Items[i];
-            if (currentTarget.isAlive == false) continue;
+            if (!currentTarget.isTargetable()) continue;
             targetLoc.x = currentTarget.positionRef.transform.position.x;
             targetLoc.y = currentTarget.positionRef.transform.position.z;
             deltaDistance = Vector2.Distance(attackerLoc, targetLoc);

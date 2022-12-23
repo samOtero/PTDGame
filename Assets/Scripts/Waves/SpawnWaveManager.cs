@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,42 +6,35 @@ public class SpawnWaveManager : MonoBehaviour
     public UnitEvent UnitLeftEvent;
     public UnitEvent UnitDefeatedEvent;
     public UnitEvent UnitCapturedEvent;
+    public UnitEvent AddToPoolEvent;
     public SpawnEnemyInPath SpawnEnemyInPathEvent;
     public CreateUnitEvent CreateEnemyUnitEvent;
     public List<Waypoint> PathList;
-    public List<Unit> UnitList;
 
     // Start is called before the first frame update
     void Start()
     {
-        UnitList = new List<Unit>();
-        UnitLeftEvent.RegisterListener(UnitLeftLevelEvent);
+        UnitLeftEvent.RegisterListener(onUnitLeftLevelEvent);
         UnitDefeatedEvent.RegisterListener(onUnitDefeated);
         UnitCapturedEvent.RegisterListener(onUnitCaptured);
         SpawnEnemyInPathEvent.RegisterListener(onSpawnEnemyInPath);
     }
 
-    // Update is called once per frame
-    void Update()
+    public int onUnitLeftLevelEvent(Unit whichUnit)
     {
-        
-    }
-    public int UnitLeftLevelEvent(Unit whichUnit)
-    {
-        whichUnit.doHide();
-        AddToPool(whichUnit);
+        AddToPoolEvent.Raise(whichUnit);
         return 0;
     }
 
     public int onUnitDefeated(Unit whichUnit)
     {
-        AddToPool(whichUnit);
+        AddToPoolEvent.Raise(whichUnit);
         return 0;
     }
 
     public int onUnitCaptured(Unit whichUnit)
     {
-        AddToPool(whichUnit);
+        AddToPoolEvent.Raise(whichUnit);
         return 0;
     }
 
@@ -60,36 +52,10 @@ public class SpawnWaveManager : MonoBehaviour
     // When the spawn enemy in path event is called, we will spawn the enemy
     public int onSpawnEnemyInPath(UnitProfileObj profile, int pathNum)
     {
-        var path = PathList[pathNum];
-        // Do some pooling here
-        var newProfile = new UnitProfile(profile);
-        var enemyUnit = GetFromPool(newProfile);
-        if (enemyUnit != null) spawnEnemy(enemyUnit, path);
-        else spawnEnemyOnPath(newProfile, path);
-        return 1;
-    }
-
-    private Unit GetFromPool(UnitProfile profile)
-    {
-        if (UnitList.Count > 0)
-        {
-            // TODO: Actually look at enemy profile to check to see if we can use this unit
-            var unit = UnitList[0];
-            UnitList.RemoveAt(0);
-            return unit;
-        }
-
-        return null;
-    }
-
-    private void AddToPool(Unit unit)
-    {
-        UnitList.Add(unit);
-    }
-
-    private void spawnEnemyOnPath(UnitProfile profile, Waypoint path)
-    {
-        var unit = CreateEnemyUnitEvent.Raise(profile, TDUnitTypes.BASIC_ENEMY);
+        Waypoint path = PathList[pathNum];
+        UnitProfile newProfile = new UnitProfile(profile);
+        Unit unit = CreateEnemyUnitEvent.Raise(newProfile, TDUnitTypes.BASIC_ENEMY);
         spawnEnemy(unit, path);
+        return 1;
     }
 }

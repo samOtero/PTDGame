@@ -1,12 +1,37 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TDUnitFactory : MonoBehaviour
 {
     public CreateUnitEvent CreateEvent;
+    public UnitEvent AddToPoolEvent;
+    public List<Unit> UnitList;
 
     private void Start()
     {
+        UnitList = new List<Unit>();
         CreateEvent.RegisterListener(onCreateUnitEvent);
+        AddToPoolEvent.RegisterListener(onAddToPool);
+    }
+
+    private Unit GetFromPool(UnitProfile profile)
+    {
+        if (UnitList.Count > 0)
+        {
+            // TODO: Actually look at enemy profile to check to see if we can use this unit
+            // Use the enemyTypeId!!
+            var unit = UnitList[0];
+            UnitList.RemoveAt(0);
+            return unit;
+        }
+
+        return null;
+    }
+
+    public int onAddToPool(Unit unit)
+    {
+        UnitList.Add(unit);
+        return 1;
     }
 
     private UnitCreateConfig getUnitTypeConfig(TDUnitTypes unitType)
@@ -33,7 +58,14 @@ public class TDUnitFactory : MonoBehaviour
 
     public Unit onCreateUnitEvent(UnitProfile unitProfile, TDUnitTypes unitType, int partyPosition=-1)
     {
+        //Try to get unit from pool
         var config = getUnitTypeConfig(unitType);
+
+        if (config.isEnemy)
+        {
+            var poolEnemy = GetFromPool(unitProfile);
+            if (poolEnemy != null) return poolEnemy;
+        }
 
         var newUnit = Instantiate(Resources.Load(config.templateResourceName)) as GameObject;
         var unitGfxName = UnitProfile.GetWholeUnitGfxName(unitProfile.unitID);
@@ -41,7 +73,7 @@ public class TDUnitFactory : MonoBehaviour
 
         // Get graphic resource
         var graphicResourceName = "unitGfx/" + unitGfxName;
-        var unitGfx = Object.Instantiate(Resources.Load(graphicResourceName), newUnit.transform) as GameObject;
+        var unitGfx = Instantiate(Resources.Load(graphicResourceName), newUnit.transform) as GameObject;
         unitGfx.name = "unitGfx";
 
         //Set unit script
