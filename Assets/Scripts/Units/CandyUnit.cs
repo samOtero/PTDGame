@@ -6,6 +6,7 @@ public class CandyUnit : MonoBehaviour
 {
     public CandyRuntimeCollection candyList;
     public Transform CandyContainer;
+    public BasicEvent CandyCapturedEvent;
     public bool onFloor;
     // Start is called before the first frame update
     void Start()
@@ -27,7 +28,7 @@ public class CandyUnit : MonoBehaviour
         candyList.Remove(this);
         onFloor = false;
         Destroy(gameObject);
-        //TODO: Add captured candy event
+        CandyCapturedEvent.Raise();
     }
 
     public bool canPickup() {

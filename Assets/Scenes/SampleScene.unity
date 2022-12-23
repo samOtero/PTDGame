@@ -123,58 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &84706275
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 84706276}
-  - component: {fileID: 84706277}
-  m_Layer: 0
-  m_Name: SpawnWaveManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &84706276
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 84706275}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1976042921}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &84706277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 84706275}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc0c49c411965fe44b61f3ab88aac1e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UnitLeftEvent: {fileID: 11400000, guid: b3943d2a975a94546b36fe35990302e2, type: 2}
-  UnitDefeatedEvent: {fileID: 11400000, guid: 09522cd547de67c42bbdaf82ca1f1423, type: 2}
-  UnitCapturedEvent: {fileID: 11400000, guid: f77cec3988eae6745b00a667a21340a9, type: 2}
-  AddToPoolEvent: {fileID: 11400000, guid: a84c28c42d4d1a147aac15ae15ad41a8, type: 2}
-  SpawnEnemyInPathEvent: {fileID: 11400000, guid: 0bffa813c37d3e745be07e9135249f39, type: 2}
-  CreateEnemyUnitEvent: {fileID: 11400000, guid: fd87d31eab81f6646b326ca6c8dab592, type: 2}
-  PathList:
-  - {fileID: 2439785642903266791}
 --- !u!4 &91271278 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5916099752294032637, guid: 56de205773340a0498a304d410934320, type: 3}
@@ -218,6 +166,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 541da1d0ac6bd9b41ba4259b5324362d, type: 2}
   - {fileID: 11400000, guid: c92e49c304a27054ab557ee19365a77f, type: 2}
   currentContainer: {fileID: 0}
+  WavesCompleted: {fileID: 11400000, guid: 8ac9f0a86878a1246a6a4d776a868a06, type: 2}
+  CreateEnemyUnitEvent: {fileID: 11400000, guid: fd87d31eab81f6646b326ca6c8dab592, type: 2}
+  SpawnEnemyInPathEvent: {fileID: 11400000, guid: 0bffa813c37d3e745be07e9135249f39, type: 2}
+  PathList:
+  - {fileID: 2439785642903266791}
   waveNum: 0
   isCompleted: 0
 --- !u!4 &132390263
@@ -395,6 +348,60 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &221731142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 221731143}
+  - component: {fileID: 221731144}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &221731143
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221731142}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1976042921}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &221731144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221731142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e198667f1b3f004d80dc07c48675dd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UnitLeftEvent: {fileID: 11400000, guid: b3943d2a975a94546b36fe35990302e2, type: 2}
+  UnitDefeatedEvent: {fileID: 11400000, guid: 09522cd547de67c42bbdaf82ca1f1423, type: 2}
+  UnitCapturedEvent: {fileID: 11400000, guid: f77cec3988eae6745b00a667a21340a9, type: 2}
+  CandyCapturedEvent: {fileID: 11400000, guid: 5ffa1a64cc4bc2943bbf6d02655586eb, type: 2}
+  WavesCompleted: {fileID: 11400000, guid: 8ac9f0a86878a1246a6a4d776a868a06, type: 2}
+  LevelOver: {fileID: 11400000, guid: feadf2fdcd8572d4cab1093c7a504d7d, type: 2}
+  EnemyList: {fileID: 11400000, guid: 1cc071c849b80c94b9510cc744814dd7, type: 2}
+  CandyList: {fileID: 11400000, guid: aa6b95dcb1e7fcd4f8bb636847b7a01a, type: 2}
+  AddToPoolEvent: {fileID: 11400000, guid: a84c28c42d4d1a147aac15ae15ad41a8, type: 2}
+  SetRunSpeed: {fileID: 11400000, guid: 2a0cdf99d505f804b8330c12e931f61e, type: 2}
 --- !u!1 &222009110
 GameObject:
   m_ObjectHideFlags: 0
@@ -2814,9 +2821,9 @@ Transform:
   - {fileID: 91271278}
   - {fileID: 1763097631}
   - {fileID: 1294913648}
-  - {fileID: 84706276}
   - {fileID: 1979496531}
   - {fileID: 602424762}
+  - {fileID: 221731143}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

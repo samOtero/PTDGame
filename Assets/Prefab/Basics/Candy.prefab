@@ -30,9 +30,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 19.01, y: 0.73, z: -17.91}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2049374800411789608
 MeshFilter:
@@ -110,4 +111,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   candyList: {fileID: 11400000, guid: aa6b95dcb1e7fcd4f8bb636847b7a01a, type: 2}
+  CandyContainer: {fileID: 0}
+  CandyCapturedEvent: {fileID: 11400000, guid: 5ffa1a64cc4bc2943bbf6d02655586eb, type: 2}
   onFloor: 1
