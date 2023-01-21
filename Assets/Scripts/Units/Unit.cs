@@ -76,9 +76,6 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
         isAlive = false;
 
         this.profile = profile;
-        // Add unit to it's respective list
-        if (isEnemy && EnemyList) EnemyList.Add(this);
-        else if (!isEnemy && FriendlyList) FriendlyList.Add(this);
         positionRef = getPositionObject();
         graphicRef = getUnitGraphicObject();
         if (graphicRef) {
@@ -102,7 +99,8 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
         setLife(totalLife);
         id++; //increase id so we know this is no longer the same unit, this needs to come from a global value!
         isAlive = true;
-        hitMeList = new List<Unit>();   
+        hitMeList = new List<Unit>();
+        addToList();
     }
 
     protected void setLife(int newLife) {
@@ -145,6 +143,19 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
         giveExperience();
         doHide();
         UnitCaptured.Raise(this);
+        removeFromList();
+    }
+
+    public void removeFromList()
+    {
+        if (isEnemy && EnemyList) EnemyList.Remove(this);
+    }
+
+    public void addToList()
+    {
+        // Add unit to it's respective list
+        if (isEnemy && EnemyList) EnemyList.Add(this);
+        else if (!isEnemy && FriendlyList) FriendlyList.Add(this);
     }
 
     public bool canCapture() {
@@ -153,6 +164,9 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
         return isCapturable;
     }
 
+    /// <summary>
+    /// When a tower unit is returned to it's ball
+    /// </summary>
     public void removeFromBattle() {
         if (currentSpot) currentSpot.removeUnit(this);
         setIsBattling(false);
@@ -231,6 +245,7 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
         giveExperience();
         doHide();
         if (UnitDefeatedEvent) UnitDefeatedEvent.Raise(this);
+        removeFromList();
     }
 
     // Used for enemies when they leave level
@@ -238,6 +253,7 @@ public class Unit : MonoBehaviour, ITargetable, IHasLife
     {
         setIsBattling(false);
         doHide();
+        removeFromList();
     }
 
 
